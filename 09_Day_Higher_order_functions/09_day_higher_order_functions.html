@@ -1,0 +1,544 @@
+
+
+<p><a href="../08_Day_Objects/08_day_objects.html">&lt;&lt; Day 8</a> | <a href="../10_Day_Sets_and_Maps/10_day_Sets_and_Maps.html">Day 10 &gt;&gt;</a></p>
+<p><img src="../images/banners/day_1_9.png" alt="Day 5"></p>
+<ul>
+<li><a href="#day-9">Day 9</a><ul>
+<li><a href="#higher-order-function">Higher Order Function</a><ul>
+<li><a href="#callback">Callback</a></li>
+<li><a href="#returning-function">Returning function</a></li>
+<li><a href="#setting-time">Setting time</a><ul>
+<li><a href="#setting-interval-using-a-setinterval-function">Setting Interval using a setInterval function</a></li>
+<li><a href="#setting-a-time-using-a-settimeout">Setting a time using a setTimeout</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#functional-programming">Functional Programming</a><ul>
+<li><a href="#foreach">forEach</a></li>
+<li><a href="#map">map</a></li>
+<li><a href="#filter">filter</a></li>
+<li><a href="#reduce">reduce</a></li>
+<li><a href="#every">every</a></li>
+<li><a href="#find">find</a></li>
+<li><a href="#findindex">findIndex</a></li>
+<li><a href="#some">some</a></li>
+<li><a href="#sort">sort</a><ul>
+<li><a href="#sorting-string-values">Sorting string values</a></li>
+<li><a href="#sorting-numeric-values">Sorting Numeric values</a></li>
+<li><a href="#sorting-object-arrays">Sorting Object Arrays</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#-exercises">💻 Exercises</a><ul>
+<li><a href="#exercises-level-1">Exercises: Level 1</a></li>
+<li><a href="#exercises-level-2">Exercises: Level 2</a></li>
+<li><a href="#exercises-level-3">Exercises: Level 3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="day-9">Day 9</h1>
+<h2 id="higher-order-function">Higher Order Function</h2>
+<p>Higher order functions are functions which take other function as a parameter or return a function as a value. The function passed as a parameter is called callback.</p>
+<h3 id="callback">Callback</h3>
+<p>A callback is a function which can be passed as parameter to other function. See the example below.</p>
+<pre><code class="language-js">// a callback function, the name of the function could be any name
+const callback = (n) =&gt; {
+  return n ** 2
+}
+​
+// function that takes other function as a callback
+function cube(callback, n) {
+  return callback(n) * n
+}
+​
+console.log(cube(callback, 3))
+</code></pre>
+<h3 id="returning-function">Returning function</h3>
+<p>Higher order functions return function as a value
+​</p>
+<pre><code class="language-js">// Higher order function returning an other function
+const higherOrder = n =&gt; {
+  const doSomething = m =&gt; {
+    const doWhatEver = t =&gt; {
+      return 2 * n + 3 * m + t
+    }
+    return doWhatEver
+  }
+  return doSomething
+}
+console.log(higherOrder(2)(3)(10))
+</code></pre>
+<p>Let us see were we use call back functions. For instance the <em>forEach</em> method uses call back.</p>
+<pre><code class="language-js">const numbers = [1, 2, 3, 4, 5]
+const sumArray = arr =&gt; {
+  let sum = 0
+  const callback = function(element) {
+    sum += element
+  }
+  arr.forEach(callback)
+  return sum
+
+}
+console.log(sumArray(numbers))
+</code></pre>
+<pre><code class="language-sh">15
+</code></pre>
+<p>The above example can be simplified as follows:</p>
+<pre><code class="language-js">const numbers = [1, 2, 3, 4]
+​
+const sumArray = arr =&gt; {
+  let sum = 0
+  arr.forEach(function(element) {
+    sum += element
+  })
+  return sum
+
+}
+console.log(sumArray(numbers))
+</code></pre>
+<pre><code class="language-sh">15
+</code></pre>
+<h3 id="setting-time">Setting time</h3>
+<p>In JavaScript we can execute some activities in a certain interval of time or we can schedule(wait) for some time to execute some activities.</p>
+<ul>
+<li>setInterval</li>
+<li>setTimeout</li>
+</ul>
+<h4 id="setting-interval-using-a-setinterval-function">Setting Interval using a setInterval function</h4>
+<p>In JavaScript, we use setInterval higher order function to do some activity continuously with in some interval of time. The setInterval global method take a callback function and a duration as a parameter. The duration is in milliseconds and the callback will be always called in that interval of time.</p>
+<pre><code class="language-js">// syntax
+function callback() {
+  // code goes here
+}
+setInterval(callback, duration)
+</code></pre>
+<pre><code class="language-js">function sayHello() {
+  console.log(&#39;Hello&#39;)
+}
+setInterval(sayHello, 1000) // it prints hello in every second, 1000ms is 1s
+</code></pre>
+<h4 id="setting-a-time-using-a-settimeout">Setting a time using a setTimeout</h4>
+<p>In JavaScript, we use setTimeout higher order function to execute some action at some time in the future. The setTimeout global method take a callback function and a duration as a parameter. The duration is in milliseconds and the callback wait for that amount of time.</p>
+<pre><code class="language-js">// syntax
+function callback() {
+  // code goes here
+}
+setTimeout(callback, duration) // duration in milliseconds
+</code></pre>
+<pre><code class="language-js">function sayHello() {
+  console.log(&#39;Hello&#39;)
+}
+setTimeout(sayHello, 2000) // it prints hello after it waits for 2 seconds.
+</code></pre>
+<h2 id="functional-programming">Functional Programming</h2>
+<p>Instead of writing regular loop, latest version of JavaScript introduced lots of built in methods which can help us to solve complicated problems. All builtin methods take callback function. In this section, we will see <em>forEach</em>, <em>map</em>, <em>filter</em>, <em>reduce</em>, <em>find</em>, <em>every</em>, <em>some</em>, and <em>sort</em>.</p>
+<h3 id="foreach">forEach</h3>
+<p><em>forEach</em>: Iterate an array elements. We use <em>forEach</em> only with arrays. It takes a callback function with elements, index parameter and array itself. The index and the array optional.</p>
+<pre><code class="language-js">arr.forEach(function (element, index, arr) {
+  console.log(index, element, arr)
+})
+// The above code can be written using arrow function
+arr.forEach((element, index, arr) =&gt; {
+  console.log(index, element, arr)
+})
+// The above code can be written using arrow function and explicit return
+arr.forEach((element, index, arr) =&gt; console.log(index, element, arr))
+</code></pre>
+<pre><code class="language-js">let sum = 0;
+const numbers = [1, 2, 3, 4, 5];
+numbers.forEach(num =&gt; console.log(num))
+console.log(sum)
+</code></pre>
+<pre><code class="language-sh">1
+2
+3
+4
+5
+</code></pre>
+<pre><code class="language-js">let sum = 0;
+const numbers = [1, 2, 3, 4, 5];
+numbers.forEach(num =&gt; sum += num)
+
+console.log(sum)
+</code></pre>
+<pre><code class="language-sh">15
+</code></pre>
+<pre><code class="language-js">const countries = [&#39;Finland&#39;, &#39;Denmark&#39;, &#39;Sweden&#39;, &#39;Norway&#39;, &#39;Iceland&#39;]
+countries.forEach((element) =&gt; console.log(element.toUpperCase()))
+</code></pre>
+<pre><code class="language-sh">FINLAND
+DENMARK
+SWEDEN
+NORWAY
+ICELAND
+</code></pre>
+<h3 id="map">map</h3>
+<p><em>map</em>: Iterate an array elements and modify the array elements. It takes a callback function with elements,  index , array parameter and return a new array.</p>
+<pre><code class="language-js">const modifiedArray = arr.map(function (element, index, arr) {
+  return element
+})
+</code></pre>
+<pre><code class="language-js">/*Arrow function and explicit return
+const modifiedArray = arr.map((element,index) =&gt; element);
+*/
+//Example
+const numbers = [1, 2, 3, 4, 5]
+const numbersSquare = numbers.map((num) =&gt; num * num)
+
+console.log(numbersSquare)
+</code></pre>
+<pre><code class="language-sh">[1, 4, 9, 16, 25]
+</code></pre>
+<pre><code class="language-js">const names = [&#39;Asabeneh&#39;, &#39;Mathias&#39;, &#39;Elias&#39;, &#39;Brook&#39;]
+const namesToUpperCase = names.map((name) =&gt; name.toUpperCase())
+console.log(namesToUpperCase)
+</code></pre>
+<pre><code class="language-sh">[&#39;ASABENEH&#39;, &#39;MATHIAS&#39;, &#39;ELIAS&#39;, &#39;BROOK&#39;]
+</code></pre>
+<pre><code class="language-js">const countries = [
+  &#39;Albania&#39;,
+  &#39;Bolivia&#39;,
+  &#39;Canada&#39;,
+  &#39;Denmark&#39;,
+  &#39;Ethiopia&#39;,
+  &#39;Finland&#39;,
+  &#39;Germany&#39;,
+  &#39;Hungary&#39;,
+  &#39;Ireland&#39;,
+  &#39;Japan&#39;,
+  &#39;Kenya&#39;,
+]
+const countriesToUpperCase = countries.map((country) =&gt; country.toUpperCase())
+console.log(countriesToUpperCase)
+
+/*
+// Arrow function
+const countriesToUpperCase = countries.map((country) =&gt; {
+  return country.toUpperCase();
+})
+//Explicit return arrow function
+const countriesToUpperCase = countries.map(country =&gt; country.toUpperCase());
+*/
+</code></pre>
+<pre><code class="language-sh">[&#39;ALBANIA&#39;, &#39;BOLIVIA&#39;, &#39;CANADA&#39;, &#39;DENMARK&#39;, &#39;ETHIOPIA&#39;, &#39;FINLAND&#39;, &#39;GERMANY&#39;, &#39;HUNGARY&#39;, &#39;IRELAND&#39;, &#39;JAPAN&#39;, &#39;KENYA&#39;]
+</code></pre>
+<pre><code class="language-js">const countriesFirstThreeLetters = countries.map((country) =&gt;
+  country.toUpperCase().slice(0, 3)
+)
+</code></pre>
+<pre><code class="language-sh"> [&quot;ALB&quot;, &quot;BOL&quot;, &quot;CAN&quot;, &quot;DEN&quot;, &quot;ETH&quot;, &quot;FIN&quot;, &quot;GER&quot;, &quot;HUN&quot;, &quot;IRE&quot;, &quot;JAP&quot;, &quot;KEN&quot;]
+</code></pre>
+<h3 id="filter">filter</h3>
+<p><em>Filter</em>: Filter out items which full fill filtering conditions and return a new array.</p>
+<pre><code class="language-js">//Filter countries containing land
+const countriesContainingLand = countries.filter((country) =&gt;
+  country.includes(&#39;land&#39;)
+)
+console.log(countriesContainingLand)
+</code></pre>
+<pre><code class="language-sh">[&#39;Finland&#39;, &#39;Ireland&#39;]
+</code></pre>
+<pre><code class="language-js">const countriesEndsByia = countries.filter((country) =&gt; country.endsWith(&#39;ia&#39;))
+console.log(countriesEndsByia)
+</code></pre>
+<pre><code class="language-sh">[&#39;Albania&#39;, &#39;Bolivia&#39;,&#39;Ethiopia&#39;]
+</code></pre>
+<pre><code class="language-js">const countriesHaveFiveLetters = countries.filter(
+  (country) =&gt; country.length === 5
+)
+console.log(countriesHaveFiveLetters)
+</code></pre>
+<pre><code class="language-sh">[&#39;Japan&#39;, &#39;Kenya&#39;]
+</code></pre>
+<pre><code class="language-js">const scores = [
+  { name: &#39;Asabeneh&#39;, score: 95 },
+   { name: &#39;Lidiya&#39;, score: 98 },
+  { name: &#39;Mathias&#39;, score: 80 },
+  { name: &#39;Elias&#39;, score: 50 },
+  { name: &#39;Martha&#39;, score: 85 },
+  { name: &#39;John&#39;, score: 100 },
+]
+
+const scoresGreaterEighty = scores.filter((score) =&gt; score.score &gt; 80)
+console.log(scoresGreaterEighty)
+</code></pre>
+<pre><code class="language-sh">[{name: &#39;Asabeneh&#39;, score: 95}, { name: &#39;Lidiya&#39;, score: 98 },{name: &#39;Martha&#39;, score: 85},{name: &#39;John&#39;, score: 100}]
+</code></pre>
+<h3 id="reduce">reduce</h3>
+<p><em>reduce</em>: Reduce takes a callback function. The call back function takes accumulator,  current, and optional initial value as a parameter and returns a single value. It is a good practice to define an initial value for the accumulator value. If we do not specify this parameter, by default accumulator will get array <code>first value</code>. If our array is an <em>empty array</em>, then <code>Javascript</code> will throw an error.</p>
+<pre><code class="language-js">arr.reduce((acc, cur) =&gt; {
+  // some operations goes here before returning a value
+ return 
+}, initialValue)
+</code></pre>
+<pre><code class="language-js">const numbers = [1, 2, 3, 4, 5]
+const sum = numbers.reduce((acc, cur) =&gt; acc + cur, 0)
+
+console.log(sum)
+</code></pre>
+<pre><code class="language-js">15
+</code></pre>
+<h3 id="every">every</h3>
+<p><em>every</em>: Check if all the elements are similar in one aspect. It returns boolean</p>
+<pre><code class="language-js">const names = [&#39;Asabeneh&#39;, &#39;Mathias&#39;, &#39;Elias&#39;, &#39;Brook&#39;]
+const areAllStr = names.every((name) =&gt; typeof name === &#39;string&#39;) // Are all strings?
+
+console.log(areAllStr)
+</code></pre>
+<pre><code class="language-sh">true
+</code></pre>
+<pre><code class="language-js">const bools = [true, true, true, true]
+const areAllTrue = bools.every((b) =&gt; b === true) // Are all true? 
+
+console.log(areAllTrue) // true
+</code></pre>
+<pre><code class="language-sh">true
+</code></pre>
+<h3 id="find">find</h3>
+<p><em>find</em>: Return the first element which satisfies the condition</p>
+<pre><code class="language-js">const ages = [24, 22, 25, 32, 35, 18]
+const age = ages.find((age) =&gt; age &lt; 20)
+
+console.log(age)
+</code></pre>
+<pre><code class="language-js">18
+</code></pre>
+<pre><code class="language-js">const names = [&#39;Asabeneh&#39;, &#39;Mathias&#39;, &#39;Elias&#39;, &#39;Brook&#39;]
+const result = names.find((name) =&gt; name.length &gt; 7)
+console.log(result)
+</code></pre>
+<pre><code class="language-sh">Asabeneh
+</code></pre>
+<pre><code class="language-js">const scores = [
+  { name: &#39;Asabeneh&#39;, score: 95 },
+  { name: &#39;Mathias&#39;, score: 80 },
+  { name: &#39;Elias&#39;, score: 50 },
+  { name: &#39;Martha&#39;, score: 85 },
+  { name: &#39;John&#39;, score: 100 },
+]
+
+const score = scores.find((user) =&gt; user.score &gt; 80)
+console.log(score)
+</code></pre>
+<pre><code class="language-sh">{ name: &quot;Asabeneh&quot;, score: 95 }
+</code></pre>
+<h3 id="findindex">findIndex</h3>
+<p><em>findIndex</em>: Return the position of the first element which satisfies the condition</p>
+<pre><code class="language-js">const names = [&#39;Asabeneh&#39;, &#39;Mathias&#39;, &#39;Elias&#39;, &#39;Brook&#39;]
+const ages = [24, 22, 25, 32, 35, 18]
+
+const result = names.findIndex((name) =&gt; name.length &gt; 7)
+console.log(result) // 0
+
+const age = ages.findIndex((age) =&gt; age &lt; 20)
+console.log(age) // 5
+</code></pre>
+<h3 id="some">some</h3>
+<p><em>some</em>: Check if some of the elements are similar in one aspect. It returns boolean</p>
+<pre><code class="language-js">const names = [&#39;Asabeneh&#39;, &#39;Mathias&#39;, &#39;Elias&#39;, &#39;Brook&#39;]
+const bools = [true, true, true, true]
+
+const areSomeTrue = bools.some((b) =&gt;  b === true)
+
+console.log(areSomeTrue) //true
+</code></pre>
+<pre><code class="language-js">const areAllStr = names.some((name) =&gt; typeof name === &#39;number&#39;) // Are all strings ?
+console.log(areAllStr) // false
+</code></pre>
+<h3 id="sort">sort</h3>
+<p><em>sort</em>: The sort methods arranges the array elements either ascending or descending order. By default, the <strong><em>sort()</em></strong> method sorts values as strings.This works well for string array items but not for numbers. If number values are sorted as strings and it give us wrong result. Sort method modify the original array. It is recommended to copy the original data before you start using <em>sort</em> method.</p>
+<h4 id="sorting-string-values">Sorting string values</h4>
+<pre><code class="language-js">const products = [&#39;Milk&#39;, &#39;Coffee&#39;, &#39;Sugar&#39;, &#39;Honey&#39;, &#39;Apple&#39;, &#39;Carrot&#39;]
+console.log(products.sort()) // [&#39;Apple&#39;, &#39;Carrot&#39;, &#39;Coffee&#39;, &#39;Honey&#39;, &#39;Milk&#39;, &#39;Sugar&#39;]
+//Now the original products array  is also sorted
+</code></pre>
+<h4 id="sorting-numeric-values">Sorting Numeric values</h4>
+<p>As you can see in the example below, 100 came first after sorted in ascending order. Sort converts items to string , since &#39;100&#39; and other numbers compared, 1 which the beginning of the string &#39;100&#39; became the smallest. To avoid this, we use a compare call back function inside the sort method, which return a negative, zero or positive.</p>
+<pre><code class="language-js">const numbers = [9.81, 3.14, 100, 37]
+// Using sort method to sort number items provide a wrong result. see below
+console.log(numbers.sort()) //[100, 3.14, 37, 9.81]
+numbers.sort(function (a, b) {
+  return a - b
+})
+
+console.log(numbers) // [3.14, 9.81, 37, 100]
+
+numbers.sort(function (a, b) {
+  return b - a
+})
+console.log(numbers) //[100, 37, 9.81, 3.14]
+</code></pre>
+<h4 id="sorting-object-arrays">Sorting Object Arrays</h4>
+<p>Whenever we sort objects in an array, we use the object key to compare. Let us see the example below.</p>
+<pre><code class="language-js">objArr.sort(function (a, b) {
+  if (a.key &lt; b.key) return -1
+  if (a.key &gt; b.key) return 1
+  return 0
+})
+
+// or
+
+objArr.sort(function (a, b) {
+  if (a[&#39;key&#39;] &lt; b[&#39;key&#39;]) return -1
+  if (a[&#39;key&#39;] &gt; b[&#39;key&#39;]) return 1
+  return 0
+})
+
+const users = [
+  { name: &#39;Asabeneh&#39;, age: 150 },
+  { name: &#39;Brook&#39;, age: 50 },
+  { name: &#39;Eyob&#39;, age: 100 },
+  { name: &#39;Elias&#39;, age: 22 },
+]
+users.sort((a, b) =&gt; {
+  if (a.age &lt; b.age) return -1
+  if (a.age &gt; b.age) return 1
+  return 0
+})
+console.log(users) // sorted ascending
+// [{…}, {…}, {…}, {…}]
+</code></pre>
+<p>🌕 You are doing great.Never give up because great things take time. You have just completed day 9 challenges and you are 9 steps a head in to your way to greatness. Now do some exercises for your brain and for your muscle.</p>
+<h2 id="💻-exercises">💻 Exercises</h2>
+<h3 id="exercises-level-1">Exercises: Level 1</h3>
+<pre><code class="language-js">const countries = [&#39;Finland&#39;, &#39;Sweden&#39;, &#39;Denmark&#39;, &#39;Norway&#39;, &#39;IceLand&#39;]
+const names = [&#39;Asabeneh&#39;, &#39;Mathias&#39;, &#39;Elias&#39;, &#39;Brook&#39;]
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+const products = [
+  { product: &#39;banana&#39;, price: 3 },
+  { product: &#39;mango&#39;, price: 6 },
+  { product: &#39;potato&#39;, price: &#39; &#39; },
+  { product: &#39;avocado&#39;, price: 8 },
+  { product: &#39;coffee&#39;, price: 10 },
+  { product: &#39;tea&#39;, price: &#39;&#39; },
+]
+</code></pre>
+<ol>
+<li>Explain the difference between <strong><em>forEach, map, filter, and reduce</em></strong>.</li>
+<li>Define a callback function before you use it in forEach, map, filter or reduce.</li>
+<li>Use <strong><em>forEach</em></strong> to console.log each country in the countries array.</li>
+<li>Use <strong><em>forEach</em></strong> to console.log each name in the names array.</li>
+<li>Use <strong><em>forEach</em></strong> to console.log each number in the numbers array.</li>
+<li>Use <strong><em>map</em></strong> to create a new array by changing each country to uppercase in the countries array.</li>
+<li>Use <strong><em>map</em></strong> to create an array of countries length from countries array.</li>
+<li>Use <strong><em>map</em></strong> to create a new array by changing each number to square in the numbers array</li>
+<li>Use <strong><em>map</em></strong> to change to each name to uppercase in the names array</li>
+<li>Use <strong><em>map</em></strong> to map the products array to its corresponding prices.</li>
+<li>Use <strong><em>filter</em></strong> to filter out countries containing <strong><em>land</em></strong>.</li>
+<li>Use <strong><em>filter</em></strong> to filter out countries having six character.</li>
+<li>Use <strong><em>filter</em></strong> to filter out countries containing six letters and more in the country array.</li>
+<li>Use <strong><em>filter</em></strong> to filter out country start with &#39;E&#39;;</li>
+<li>Use <strong><em>filter</em></strong> to filter out only prices with values.</li>
+<li>Declare a function called getStringLists which takes an array as a parameter and then returns an array only with string items.</li>
+<li>Use <strong><em>reduce</em></strong> to sum all the numbers in the numbers array.</li>
+<li>Use <strong><em>reduce</em></strong> to concatenate all the countries and to produce this sentence: <strong><em>Estonia, Finland, Sweden, Denmark, Norway, and IceLand are north European countries</em></strong></li>
+<li>Explain the difference between <strong><em>some</em></strong> and <strong><em>every</em></strong></li>
+<li>Use <strong><em>some</em></strong> to check if some names&#39; length greater than seven in names array</li>
+<li>Use <strong><em>every</em></strong> to check if all the countries contain the word land</li>
+<li>Explain the difference between <strong><em>find</em></strong> and <strong><em>findIndex</em></strong>.</li>
+<li>Use <strong><em>find</em></strong> to find the first country containing only six letters in the countries array</li>
+<li>Use <strong><em>findIndex</em></strong> to find the position of the first country containing only six letters in the countries array</li>
+<li>Use <strong><em>findIndex</em></strong> to find the position of <strong><em>Norway</em></strong> if it doesn&#39;t exist in the array you will get -1.</li>
+<li>Use <strong><em>findIndex</em></strong> to find the position of <strong><em>Russia</em></strong> if it doesn&#39;t exist in the array you will get -1.</li>
+</ol>
+<h3 id="exercises-level-2">Exercises: Level 2</h3>
+<ol>
+<li>Find the total price of products by chaining two or more array iterators(eg. arr.map(callback).filter(callback).reduce(callback))</li>
+<li>Find the sum of price of products using only reduce reduce(callback))</li>
+<li>Declare a function called <strong><em>categorizeCountries</em></strong> which returns an array of countries which have some common pattern(you find the countries array in this repository as countries.js(eg &#39;land&#39;, &#39;ia&#39;, &#39;island&#39;,&#39;stan&#39;)).</li>
+<li>Create a function which return an array of objects, which is the letter and the number of times the letter use to start with a name of a country.</li>
+<li>Declare a <strong><em>getFirstTenCountries</em></strong> function and return an array of ten countries. Use different functional programming to work on the countries.js array</li>
+<li>Declare a <strong><em>getLastTenCountries</em></strong> function which which returns the last ten countries in the countries array.</li>
+<li>Find out which <em>letter</em> is used many <em>times</em> as initial for a country name from the countries array (eg. Finland, Fiji, France etc)</li>
+</ol>
+<h3 id="exercises-level-3">Exercises: Level 3</h3>
+<ol>
+<li><p>Use the countries information, in the data folder. Sort countries by name, by capital, by population</p>
+</li>
+<li><p>*** Find the 10 most spoken languages:</p>
+<pre><code class="language-js">// Your output should look like this
+console.log(mostSpokenLanguages(countries, 10))
+[
+{country: &#39;English&#39;,count:91},
+{country: &#39;French&#39;,count:45},
+{country: &#39;Arabic&#39;,count:25},
+{country: &#39;Spanish&#39;,count:24},
+{country:&#39;Russian&#39;,count:9},
+{country:&#39;Portuguese&#39;, count:9},
+{country:&#39;Dutch&#39;,count:8},
+{country:&#39;German&#39;,count:7},
+{country:&#39;Chinese&#39;,count:5},
+{country:&#39;Swahili&#39;,count:4}
+]
+
+// Your output should look like this
+console.log(mostSpokenLanguages(countries, 3))
+[
+{country: &#39;English&#39;,count: 91},
+{country: &#39;French&#39;,count: 45},
+{country: &#39;Arabic&#39;,count: 25},
+]```
+</code></pre>
+</li>
+<li><p>*** Use countries_data.js file create a function which create the ten most populated countries</p>
+<pre><code class="language-js">console.log(mostPopulatedCountries(countries, 10))
+
+[
+{country: &#39;China&#39;, population: 1377422166},
+{country: &#39;India&#39;, population: 1295210000},
+{country: &#39;United States of America&#39;, population: 323947000},
+{country: &#39;Indonesia&#39;, population: 258705000},
+{country: &#39;Brazil&#39;, population: 206135893},
+{country: &#39;Pakistan&#39;, population: 194125062},
+{country: &#39;Nigeria&#39;, population: 186988000},
+{country: &#39;Bangladesh&#39;, population: 161006790},
+{country: &#39;Russian Federation&#39;, population: 146599183},
+{country: &#39;Japan&#39;, population: 126960000}
+]
+
+console.log(mostPopulatedCountries(countries, 3))
+[
+{country: &#39;China&#39;, population: 1377422166},
+{country: &#39;India&#39;, population: 1295210000},
+{country: &#39;United States of America&#39;, population: 323947000}
+]
+```
+</code></pre>
+</li>
+<li><p>*** Try to develop a program which calculate measure of central tendency of a sample(mean, median, mode) and measure of variability(range, variance, standard deviation). In addition to those measures find the min, max, count, percentile, and frequency distribution of the sample. You can create an object called statistics and create all the functions which do statistical calculations as method for the statistics object. Check the output below.</p>
+<pre><code class="language-js">const ages = [31, 26, 34, 37, 27, 26, 32, 32, 26, 27, 27, 24, 32, 33, 27, 25, 26, 38, 37, 31, 34, 24, 33, 29, 26]
+
+console.log(&#39;Count:&#39;, statistics.count()) // 25
+console.log(&#39;Sum: &#39;, statistics.sum()) // 744
+console.log(&#39;Min: &#39;, statistics.min()) // 24
+console.log(&#39;Max: &#39;, statistics.max()) // 38
+console.log(&#39;Range: &#39;, statistics.range() // 14
+console.log(&#39;Mean: &#39;, statistics.mean()) // 30
+console.log(&#39;Median: &#39;,statistics.median()) // 29
+console.log(&#39;Mode: &#39;, statistics.mode()) // {&#39;mode&#39;: 26, &#39;count&#39;: 5}
+console.log(&#39;Variance: &#39;,statistics.var()) // 17.5
+console.log(&#39;Standard Deviation: &#39;, statistics.std()) // 4.2
+console.log(&#39;Variance: &#39;,statistics.var()) // 17.5
+console.log(&#39;Frequency Distribution: &#39;,statistics.freqDist()) # [(20.0, 26), (16.0, 27), (12.0, 32), (8.0, 37), (8.0, 34), (8.0, 33), (8.0, 31), (8.0, 24), (4.0, 38), (4.0, 29), (4.0, 25)]
+</code></pre>
+<pre><code class="language-sh">console.log(statistics.describe())
+Count: 25
+Sum:  744
+Min:  24
+Max:  38
+Range:  14
+Mean:  30
+Median:  29
+Mode:  (26, 5)
+Variance:  17.5
+Standard Deviation:  4.2
+Frequency Distribution: [(20.0, 26), (16.0, 27), (12.0, 32), (8.0, 37), (8.0, 34), (8.0, 33), (8.0, 31), (8.0, 24), (4.0, 38), (4.0, 29), (4.0, 25)]
+</code></pre>
+</li>
+</ol>
+<p>🎉 CONGRATULATIONS ! 🎉</p>
+<p><a href="../08_Day_Objects/08_day_objects.md">&lt;&lt; Day 8</a> | <a href="../10_Day_Sets_and_Maps/10_day_Sets_and_Maps.md">Day 10 &gt;&gt;</a></p>

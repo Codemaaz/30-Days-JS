@@ -1,0 +1,319 @@
+
+
+<p><a href="../20_Day_Writing_clean_codes/20_day_writing_clean_codes.html">&lt;&lt; Day 20</a> | <a href="../22_Day_Manipulating_DOM_object/22_day_manipulating_DOM_object.html">Day 22 &gt;&gt;</a></p>
+<p><img src="../images/banners/day_1_21.png" alt="Thirty Days Of JavaScript"></p>
+<ul>
+<li><a href="#day-21">Day 21</a><ul>
+<li><a href="#document-object-model-dom---day-1">Document Object Model (DOM) - Day 1</a><ul>
+<li><a href="#getting-element">Getting Element</a><ul>
+<li><a href="#getting-elements-by-tag-name">Getting elements by tag name</a></li>
+<li><a href="#getting-elements-by-class-name">Getting elements by class name</a></li>
+<li><a href="#getting-an-element-by-id">Getting an element by id</a></li>
+<li><a href="#getting-elements-by-using-queryselector-methods">Getting elements by using querySelector methods</a></li>
+</ul>
+</li>
+<li><a href="#adding-attribute">Adding attribute</a><ul>
+<li><a href="#adding-attribute-using-setattribute">Adding attribute using setAttribute</a></li>
+<li><a href="#adding-attribute-without-setattribute">Adding attribute without setAttribute</a></li>
+<li><a href="#adding-class-using-classlist">Adding class using classList</a></li>
+<li><a href="#removing-class-using-remove">Removing class using remove</a></li>
+</ul>
+</li>
+<li><a href="#adding-text-to-html-element">Adding Text to HTML element</a><ul>
+<li><a href="#adding-text-content-using-textcontent">Adding Text content using textContent</a></li>
+<li><a href="#adding-text-content-using-innerhtml">Adding Text Content using innerHTML</a><ul>
+<li><a href="#text-content">Text Content</a></li>
+<li><a href="#inner-html">Inner HTML</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#adding-style">Adding style</a><ul>
+<li><a href="#adding-style-color">Adding Style Color</a></li>
+<li><a href="#adding-style-background-color">Adding Style Background Color</a></li>
+<li><a href="#adding-style-font-size">Adding Style Font Size</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#exercises">Exercises</a><ul>
+<li><a href="#exercise-level-1">Exercise: Level 1</a></li>
+<li><a href="#exercise-level-2">Exercise: Level 2</a></li>
+<li><a href="#exercise-level-3">Exercise: Level 3</a><ul>
+<li><a href="#dom-mini-project-1">DOM: Mini project 1</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="day-21">Day 21</h1>
+<h2 id="document-object-model-dom---day-1">Document Object Model (DOM) - Day 1</h2>
+<p>HTML document is structured as a JavaScript Object. Every HTML element has a different properties which can help to manipulate it. It is possible to get, create, append or remove HTML elements using JavaScript. Check the examples below. Selecting HTML element using JavaScript is similar to selecting using CSS. To select an HTML element, we use tag name, id, class name or other attributes.</p>
+<h3 id="getting-element">Getting Element</h3>
+<p>We can access already created element or elements using JavaScript. To access or get elements we use different methods. The code below has four <em>h1</em> elements. Let us see the different methods to access the <em>h1</em> elements.</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+  &lt;html lang=&quot;en&quot;&gt;
+    &lt;head&gt;
+      &lt;title&gt;Document Object Model&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+
+     &lt;h1 class=&#39;title&#39; id=&#39;first-title&#39;&gt;First Title&lt;/h1&gt;
+     &lt;h1 class=&#39;title&#39; id=&#39;second-title&#39;&gt;Second Title&lt;/h1&gt;
+     &lt;h1 class=&#39;title&#39; id=&#39;third-title&#39;&gt;Third Title&lt;/h1&gt;
+     &lt;h1&gt;&lt;/h1&gt;
+
+    &lt;/body&gt;
+  &lt;/html&gt;
+</code></pre>
+<h4 id="getting-elements-by-tag-name">Getting elements by tag name</h4>
+<p><strong><em>getElementsByTagName()</em></strong>:takes a tag name as a string parameter and this method returns an HTMLCollection object. An HTMLCollection is an array like object of HTML elements. The length property provides the size of the collection. Whenever we use this method we access the individual elements using index or after loop through each individual items. An HTMLCollection does not support all array methods therefore we should use regular for loop instead of forEach.</p>
+<pre><code class="language-js">// syntax
+document.getElementsByTagName(&#39;tagname&#39;)
+</code></pre>
+<pre><code class="language-js">const allTitles = document.getElementsByTagName(&#39;h1&#39;)
+
+console.log(allTitles) //HTMLCollections
+console.log(allTitles.length) // 4
+
+for (let i = 0; i &lt; allTitles.length; i++) {
+  console.log(allTitles[i]) // prints each elements in the HTMLCollection
+}
+</code></pre>
+<h4 id="getting-elements-by-class-name">Getting elements by class name</h4>
+<p><strong><em>getElementsByClassName()</em></strong> method returns an HTMLCollection object. An HTMLCollection is an array like list of HTML elements. The length property provides the size of the collection. It is possible to loop through all the HTMLCollection elements. See the example below</p>
+<pre><code class="language-js">//syntax
+document.getElementsByClassName(&#39;classname&#39;)
+</code></pre>
+<pre><code class="language-js">const allTitles = document.getElementsByClassName(&#39;title&#39;)
+
+console.log(allTitles) //HTMLCollections
+console.log(allTitles.length) // 4
+
+for (let i = 0; i &lt; allTitles.length; i++) {
+  console.log(allTitles[i]) // prints each elements in the HTMLCollection
+}
+</code></pre>
+<h4 id="getting-an-element-by-id">Getting an element by id</h4>
+<p><strong><em>getElementsById()</em></strong> targets a single HTML element. We pass the id without # as an argument.</p>
+<pre><code class="language-js">//syntax
+document.getElementById(&#39;id&#39;)
+</code></pre>
+<pre><code class="language-js">let firstTitle = document.getElementById(&#39;first-title&#39;)
+console.log(firstTitle) // &lt;h1&gt;First Title&lt;/h1&gt;
+</code></pre>
+<h4 id="getting-elements-by-using-queryselector-methods">Getting elements by using querySelector methods</h4>
+<p>The <em>document.querySelector</em> method can select an HTML or HTML elements by tag name, by id or by class name.</p>
+<p><strong><em>querySelector</em></strong>: can be used to select HTML element by its tag name, id or class. If the tag name is used it selects only the first element.</p>
+<pre><code class="language-js">let firstTitle = document.querySelector(&#39;h1&#39;) // select the first available h1 element
+let firstTitle = document.querySelector(&#39;#first-title&#39;) // select id with first-title
+let firstTitle = document.querySelector(&#39;.title&#39;) // select the first available element with class title
+</code></pre>
+<p><strong><em>querySelectorAll</em></strong>: can be used to select html elements by its tag name or class. It returns a nodeList which is an array like object which supports array methods. We can use <strong><em>for loop</em></strong> or <strong><em>forEach</em></strong> to loop through each nodeList elements.</p>
+<pre><code class="language-js">const allTitles = document.querySelectorAll(&#39;h1&#39;) # selects all the available h1 elements in the page
+
+console.log(allTitles.length) // 4
+for (let i = 0; i &lt; allTitles.length; i++) {
+  console.log(allTitles[i])
+}
+
+allTitles.forEach(title =&gt; console.log(title))
+const allTitles = document.querySelectorAll(&#39;.title&#39;) // the same goes for selecting using class
+</code></pre>
+<h3 id="adding-attribute">Adding attribute</h3>
+<p>An attribute is added in the opening tag of HTML which gives additional information about the element. Common HTML attributes: id, class, src, style, href,disabled, title, alt. Lets add id and class for the fourth title.</p>
+<pre><code class="language-js">const titles = document.querySelectorAll(&#39;h1&#39;)
+titles[3].className = &#39;title&#39;
+titles[3].id = &#39;fourth-title&#39;
+</code></pre>
+<h4 id="adding-attribute-using-setattribute">Adding attribute using setAttribute</h4>
+<p>The <strong><em>setAttribute()</em></strong> method set any html attribute. It takes two parameters the type of the attribute and the name of the attribute.
+Let&#39;s add class and id attribute for the fourth title.</p>
+<pre><code class="language-js">const titles = document.querySelectorAll(&#39;h1&#39;)
+titles[3].setAttribute(&#39;class&#39;, &#39;title&#39;)
+titles[3].setAttribute(&#39;id&#39;, &#39;fourth-title&#39;)
+</code></pre>
+<h4 id="adding-attribute-without-setattribute">Adding attribute without setAttribute</h4>
+<p>We can use normal object setting method to set an attribute but this can not work for all elements. Some attributes are DOM object property and they can be set directly. For instance id and class</p>
+<pre><code class="language-js">//another way to setting an attribute
+titles[3].className = &#39;title&#39;
+titles[3].id = &#39;fourth-title&#39;
+</code></pre>
+<h4 id="adding-class-using-classlist">Adding class using classList</h4>
+<p>The class list method is a good method to append additional class. It does not override the original class if a class exists rather it adds additional class for the element.</p>
+<pre><code class="language-js">//another way to setting an attribute: append the class, doesn&#39;t over ride
+titles[3].classList.add(&#39;title&#39;, &#39;header-title&#39;)
+</code></pre>
+<h4 id="removing-class-using-remove">Removing class using remove</h4>
+<p>Similar to adding we can also remove class from an element. We can remove a specific class from an element.</p>
+<pre><code class="language-js">//another way to setting an attribute: append the class, doesn&#39;t over ride
+titles[3].classList.remove(&#39;title&#39;, &#39;header-title&#39;)
+</code></pre>
+<h3 id="adding-text-to-html-element">Adding Text to HTML element</h3>
+<p>An HTML is a build block of an opening tag, a closing tag and a text content. We can add a text content using the property <em>textContent</em> or *innerHTML.</p>
+<h4 id="adding-text-content-using-textcontent">Adding Text content using textContent</h4>
+<p>The <em>textContent</em> property is used to add text to an HTML element.</p>
+<pre><code class="language-js">const titles = document.querySelectorAll(&#39;h1&#39;)
+titles[3].textContent = &#39;Fourth Title&#39;
+</code></pre>
+<h4 id="adding-text-content-using-innerhtml">Adding Text Content using innerHTML</h4>
+<p>Most people get confused between <em>textContent</em> and <em>innerHTML</em>. <em>textContent</em> is meant to add text to an HTML element, however innerHTML can add a text or HTML element or elements as a child.</p>
+<h5 id="text-content">Text Content</h5>
+<p>We assign <em>textContent</em> HTML object property to a text</p>
+<pre><code class="language-js">const titles = document.querySelectorAll(&#39;h1&#39;)
+titles[3].textContent = &#39;Fourth Title&#39;
+</code></pre>
+<h5 id="inner-html">Inner HTML</h5>
+<p>We use innerHTML property when we like to replace or a completely new children content to a parent element.
+It value we assign is going to be a string of HTML elements.</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;title&gt;JavaScript for Everyone:DOM&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div class=&quot;wrapper&quot;&gt;
+        &lt;h1&gt;Asabeneh Yetayeh challenges in 2020&lt;/h1&gt;
+        &lt;h2&gt;30DaysOfJavaScript Challenge&lt;/h2&gt;
+        &lt;ul&gt;&lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+    const lists = `
+    &lt;li&gt;30DaysOfPython Challenge Done&lt;/li&gt;
+            &lt;li&gt;30DaysOfJavaScript Challenge Ongoing&lt;/li&gt;
+            &lt;li&gt;30DaysOfReact Challenge Coming&lt;/li&gt;
+            &lt;li&gt;30DaysOfFullStack Challenge Coming&lt;/li&gt;
+            &lt;li&gt;30DaysOfDataAnalysis Challenge Coming&lt;/li&gt;
+            &lt;li&gt;30DaysOfReactNative Challenge Coming&lt;/li&gt;
+            &lt;li&gt;30DaysOfMachineLearning Challenge Coming&lt;/li&gt;`
+  const ul = document.querySelector(&#39;ul&#39;)
+  ul.innerHTML = lists
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>The innerHTML property can allow us also to remove all the children of a parent element. Instead of using removeChild() I would recommend the following method.</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;title&gt;JavaScript for Everyone:DOM&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div class=&quot;wrapper&quot;&gt;
+        &lt;h1&gt;Asabeneh Yetayeh challenges in 2020&lt;/h1&gt;
+        &lt;h2&gt;30DaysOfJavaScript Challenge&lt;/h2&gt;
+        &lt;ul&gt;
+            &lt;li&gt;30DaysOfPython Challenge Done&lt;/li&gt;
+            &lt;li&gt;30DaysOfJavaScript Challenge Ongoing&lt;/li&gt;
+            &lt;li&gt;30DaysOfReact Challenge Coming&lt;/li&gt;
+            &lt;li&gt;30DaysOfFullStack Challenge Coming&lt;/li&gt;
+            &lt;li&gt;30DaysOfDataAnalysis Challenge Coming&lt;/li&gt;
+            &lt;li&gt;30DaysOfReactNative Challenge Coming&lt;/li&gt;
+            &lt;li&gt;30DaysOfMachineLearning Challenge Coming&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+  const ul = document.querySelector(&#39;ul&#39;)
+  ul.innerHTML = &#39;&#39;
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="adding-style">Adding style</h3>
+<h4 id="adding-style-color">Adding Style Color</h4>
+<p>Let us add some style to our titles. If the element has even index we give it green color else red.</p>
+<pre><code class="language-js">const titles = document.querySelectorAll(&#39;h1&#39;)
+titles.forEach((title, i) =&gt; {
+  title.style.fontSize = &#39;24px&#39; // all titles will have 24px font size
+  if (i % 2 === 0) {
+    title.style.color = &#39;green&#39;
+  } else {
+    title.style.color = &#39;red&#39;
+  }
+})
+</code></pre>
+<h4 id="adding-style-background-color">Adding Style Background Color</h4>
+<p>Let us add some style to our titles. If the element has even index we give it green color else red.</p>
+<pre><code class="language-js">const titles = document.querySelectorAll(&#39;h1&#39;)
+titles.forEach((title, i) =&gt; {
+  title.style.fontSize = &#39;24px&#39; // all titles will have 24px font size
+  if (i % 2 === 0) {
+    title.style.backgroundColor = &#39;green&#39;
+  } else {
+    title.style.backgroundColor = &#39;red&#39;
+  }
+})
+</code></pre>
+<h4 id="adding-style-font-size">Adding Style Font Size</h4>
+<p>Let us add some style to our titles. If the element has even index we give it 20px else 30px</p>
+<pre><code class="language-js">const titles = document.querySelectorAll(&#39;h1&#39;)
+titles.forEach((title, i) =&gt; {
+  title.style.fontSize = &#39;24px&#39; // all titles will have 24px font size
+  if (i % 2 === 0) {
+    title.style.fontSize = &#39;20px&#39;
+  } else {
+    title.style.fontSize = &#39;30px&#39;
+  }
+})
+</code></pre>
+<p>As you have notice, the properties of css when we use it in JavaScript is going to be a camelCase. The  following CSS properties change from background-color to backgroundColor, font-size to fontSize, font-family to fontFamily, margin-bottom to marginBottom.</p>
+<hr>
+<p>🌕 Now,  you are fully charged with a super power, you have completed the most important and challenging part of the challenge and in general JavaScript. You learned DOM and now you have the capability to build and develop applications. Now do some exercises for your brain and for your muscle.</p>
+<h2 id="exercises">Exercises</h2>
+<h3 id="exercise-level-1">Exercise: Level 1</h3>
+<ol>
+<li>Create an index.html file and put four p elements as above: Get the first paragraph by using <strong><em>document.querySelector(tagname)</em></strong> and tag name</li>
+<li>Get each of the the paragraph using <strong><em>document.querySelector(&#39;#id&#39;)</em></strong> and by their id</li>
+<li>Get all the p as nodeList using <strong><em>document.querySelectorAll(tagname)</em></strong> and by their tag name</li>
+<li>Loop through the nodeList and get the text content of each paragraph</li>
+<li>Set a text content to paragraph the fourth paragraph,<strong><em>Fourth Paragraph</em></strong></li>
+<li>Set id and class attribute for all the paragraphs using different attribute setting methods</li>
+</ol>
+<h3 id="exercise-level-2">Exercise: Level 2</h3>
+<ol>
+<li>Change stye of each paragraph using JavaScript(eg. color, background, border, font-size, font-family)</li>
+<li>Select all paragraphs and loop through each elements and give the first and third paragraph a color of green, and the second and the fourth paragraph a red color</li>
+<li>Set text content, id and class to each paragraph</li>
+</ol>
+<h3 id="exercise-level-3">Exercise: Level 3</h3>
+<h4 id="dom-mini-project-1">DOM: Mini project 1</h4>
+<ol>
+<li><p>Develop the following application, use the following HTML elements to get started with. You will get the same code on starter folder.  Apply all the styles and functionality using JavaScript only.</p>
+<ul>
+<li>The year color is changing every 1 second</li>
+<li>The date and time background color is changing every on seconds</li>
+<li>Completed challenge has background green</li>
+<li>Ongoing challenge has background yellow</li>
+<li>Coming challenges have background red</li>
+</ul>
+</li>
+</ol>
+<pre><code class="language-html">&lt;!-- index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;title&gt;JavaScript for Everyone:DOM&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div class=&quot;wrapper&quot;&gt;
+        &lt;h1&gt;Asabeneh Yetayeh challenges in 2020&lt;/h1&gt;
+        &lt;h2&gt;30DaysOfJavaScript Challenge&lt;/h2&gt;
+        &lt;ul&gt;
+            &lt;li&gt;30DaysOfPython Challenge Done&lt;/li&gt;
+            &lt;li&gt;30DaysOfJavaScript Challenge Ongoing&lt;/li&gt;
+            &lt;li&gt;30DaysOfReact Challenge Coming&lt;/li&gt;
+            &lt;li&gt;30DaysOfFullStack Challenge Coming&lt;/li&gt;
+            &lt;li&gt;30DaysOfDataAnalysis Challenge Coming&lt;/li&gt;
+            &lt;li&gt;30DaysOfReactNative Challenge Coming&lt;/li&gt;
+            &lt;li&gt;30DaysOfMachineLearning Challenge Coming&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><img src="../images/projects/dom_min_project_challenge_info_day_1.1.gif" alt="Project 1"></p>
+<p><img src="../images/projects/dom_min_project_challenge_info_day_1.1.png" alt="Project 2"></p>
+<p>🎉 CONGRATULATIONS ! 🎉</p>
+<p><a href="../20_Day_Writing_clean_codes/20_day_writing_clean_codes.html">&lt;&lt; Day 20</a> | <a href="../22_Day_Manipulating_DOM_object/22_day_manipulating_DOM_object.html">Day 22 &gt;&gt;</a></p>

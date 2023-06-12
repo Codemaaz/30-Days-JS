@@ -1,0 +1,283 @@
+
+
+<p><a href="../12_Day_Regular_expressions/12_day_regular_expressions.html">&lt;&lt; Day 12</a> | <a href="../14_Day_Error_handling/14_day_error_handling.html">Day 14&gt;&gt;</a></p>
+<p><img src="../images/banners/day_1_13.png" alt="Thirty Days Of JavaScript"></p>
+<ul>
+<li><a href="#day-13">Day 13</a><ul>
+<li><a href="#console-object-methods">Console Object Methods</a><ul>
+<li><a href="#consolelog">console.log()</a></li>
+<li><a href="#consolewarn">console.warn()</a></li>
+<li><a href="#consoleerror">console.error()</a></li>
+<li><a href="#consoletable">console.table()</a></li>
+<li><a href="#consoletime">console.time()</a></li>
+<li><a href="#consoleinfo">console.info()</a></li>
+<li><a href="#consoleassert">console.assert()</a></li>
+<li><a href="#consolegroup">console.group()</a></li>
+<li><a href="#consolecount">console.count()</a></li>
+<li><a href="#consoleclear">console.clear()</a></li>
+</ul>
+</li>
+<li><a href="#exercises">Exercises</a><ul>
+<li><a href="#exerciseslevel-1">Exercises:Level 1</a></li>
+<li><a href="#exerciseslevel-2">Exercises:Level 2</a></li>
+<li><a href="#exerciseslevel-3">Exercises:Level 3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="day-13">Day 13</h1>
+<h2 id="console-object-methods">Console Object Methods</h2>
+<p>In this section, we will cover about console and console object methods. Absolute beginners usually do not know which to use: console.log(), document.write() or document.getElementById.</p>
+<p>We use console object methods to show output on the browser console and we use document.write to show output on the browser document(view port). Both methods used only for testing and debugging purposes. The console method is the most popular testing and debugging tool on the browser. We use document.getElementById() when we like to interact with DOM try using JavaScript. We will cover DOM in another section.</p>
+<p>In addition to the famous, console.log() method, the console provides other more methods.</p>
+<h3 id="consolelog">console.log()</h3>
+<p>We use console.log() to show output on the browser console. We can substitute values and also we can style the logging out put using %c.</p>
+<ul>
+<li>Showing output on browser console</li>
+</ul>
+<pre><code class="language-js">console.log(&#39;30 Days of JavaScript&#39;)
+</code></pre>
+<pre><code class="language-sh">30 Days of JavaScript
+</code></pre>
+<ul>
+<li>Substitution</li>
+</ul>
+<pre><code class="language-js">console.log(&#39;%d %s of JavaScript&#39;, 30, &#39;Days&#39;)
+</code></pre>
+<pre><code class="language-sh">30 Days of JavaScript
+</code></pre>
+<ul>
+<li>CSS</li>
+</ul>
+<p>We can style logging message using css. Copy the following code and paste it on browser console to see the result.</p>
+<pre><code class="language-js">console.log(&#39;%c30 Days Of JavaScript&#39;, &#39;color:green&#39;) // log output is green
+console.log(
+  &#39;%c30 Days%c %cOf%c %cJavaScript%c&#39;,
+  &#39;color:green&#39;,
+  &#39;&#39;,
+  &#39;color:red&#39;,
+  &#39;&#39;,
+  &#39;color:yellow&#39;
+) // log output green red and yellow text
+</code></pre>
+<h3 id="consolewarn">console.warn()</h3>
+<p>We use console.warn() to give warning on browser. For instance to inform or warn deprecation of version of a package or bad practices. Copy the following code and paste it on browser console to see warning messages.</p>
+<pre><code class="language-js">console.warn(&#39;This is a warning&#39;)
+console.warn(
+  &#39;You are using React. Do not touch the DOM. Virtual DOM will take care of handling the DOM!&#39;
+)
+console.warn(&#39;Warning is different from error&#39;)
+</code></pre>
+<h3 id="consoleerror">console.error()</h3>
+<p>The console.error() method shows an error messages.</p>
+<pre><code class="language-js">console.error(&#39;This is an error message&#39;)
+console.error(&#39;We all make mistakes&#39;)
+</code></pre>
+<h3 id="consoletable">console.table()</h3>
+<p>The console.table() method display data as a table on the console. Displays tabular data as a table. The console.table() takes one required argument data, which must be an array or an object, and one additional optional parameter columns.</p>
+<p>Let us first start with a simple array. The code below displays a table with two columns. An index column to display the index and value column to display the names</p>
+<pre><code class="language-js">const names = [&#39;Asabeneh&#39;, &#39;Brook&#39;, &#39;David&#39;, &#39;John&#39;]
+console.table(names)
+</code></pre>
+<p>Let us also check the result of an object. This creates table with two columns:an index column containing the keys and a value column contain the values of the object.</p>
+<pre><code class="language-js">const user = {
+  name: &#39;Asabeneh&#39;,
+  title: &#39;Programmer&#39;,
+  country: &#39;Finland&#39;,
+  city: &#39;Helsinki&#39;,
+  age: 250
+}
+console.table(user)
+</code></pre>
+<p>Check the rest of the examples by copying and paste on the browser console.</p>
+<pre><code class="language-js">const countries = [
+  [&#39;Finland&#39;, &#39;Helsinki&#39;],
+  [&#39;Sweden&#39;, &#39;Stockholm&#39;],
+  [&#39;Norway&#39;, &#39;Oslo&#39;]
+]
+console.table(countries)
+</code></pre>
+<pre><code class="language-js">const users = [
+  {
+    name: &#39;Asabeneh&#39;,
+    title: &#39;Programmer&#39;,
+    country: &#39;Finland&#39;,
+    city: &#39;Helsinki&#39;,
+    age: 250
+  },
+  {
+    name: &#39;Eyob&#39;,
+    title: &#39;Teacher&#39;,
+    country: &#39;Sweden&#39;,
+    city: &#39;London&#39;,
+    age: 25
+  },
+  {
+    name: &#39;Asab&#39;,
+    title: &#39;Instructor&#39;,
+    country: &#39;Norway&#39;,
+    city: &#39;Oslo&#39;,
+    age: 22
+  },
+  {
+    name: &#39;Matias&#39;,
+    title: &#39;Developer&#39;,
+    country: &#39;Denmark&#39;,
+    city: &#39;Copenhagen&#39;,
+    age: 28
+  }
+]
+console.table(users)
+</code></pre>
+<h3 id="consoletime">console.time()</h3>
+<p>Starts a timer you can use to track how long an operation takes. You give each timer a unique name, and may have up to 10,000 timers running on a given page. When you call console.timeEnd() with the same name, the browser will output the time, in milliseconds, that elapsed since the timer was started.</p>
+<pre><code class="language-js">const countries = [
+  [&#39;Finland&#39;, &#39;Helsinki&#39;],
+  [&#39;Sweden&#39;, &#39;Stockholm&#39;],
+  [&#39;Norway&#39;, &#39;Oslo&#39;]
+]
+
+console.time(&#39;Regular for loop&#39;)
+for (let i = 0; i &lt; countries.length; i++) {
+  console.log(countries[i][0], countries[i][1])
+}
+console.timeEnd(&#39;Regular for loop&#39;)
+
+console.time(&#39;for of loop&#39;)
+for (const [name, city] of countries) {
+  console.log(name, city)
+}
+console.timeEnd(&#39;for of loop&#39;)
+
+console.time(&#39;forEach loop&#39;)
+countries.forEach(([name, city]) =&gt; {
+  console.log(name, city)
+})
+console.timeEnd(&#39;forEach loop&#39;)
+</code></pre>
+<pre><code class="language-sh">Finland Helsinki
+Sweden Stockholm
+Norway Oslo
+Regular for loop: 0.34716796875ms
+Finland Helsinki
+Sweden Stockholm
+Norway Oslo
+for of loop: 0.26806640625ms
+Finland Helsinki
+Sweden Stockholm
+Norway Oslo
+forEach loop: 0.358154296875ms
+</code></pre>
+<p>According the above output the regular for loop is slower than for of or forEach loop.</p>
+<h3 id="consoleinfo">console.info()</h3>
+<p>It displays information message on browser console.</p>
+<pre><code class="language-js">console.info(&#39;30 Days Of JavaScript challenge is trending on Github&#39;)
+console.info(&#39;30 Days Of fullStack challenge might be released&#39;)
+console.info(&#39;30 Days Of HTML and CSS challenge might be released&#39;)
+</code></pre>
+<h3 id="consoleassert">console.assert()</h3>
+<p>The console.assert() methods writes an error message to the console if the assertion is false. If the assertion is true, nothing happens. The first parameter is an assertion expression. If this expression is false, an Assertion failed error message will be displayed.</p>
+<pre><code class="language-js">console.assert(4 &gt; 3, &#39;4 is greater than 3&#39;) // no result
+console.assert(3 &gt; 4, &#39;3 is not greater than 4&#39;) // Assertion failed: 3 is not greater than 4
+
+for (let i = 0; i &lt;= 10; i += 1) {
+  let errorMessage = `${i} is not even`
+  console.log(&#39;the # is &#39; + i)
+  console.assert(i % 2 === 0, { number: i, errorMessage: errorMessage })
+}
+</code></pre>
+<h3 id="consolegroup">console.group()</h3>
+<p>The console.group() can help to group different log groups. Copy the following code and paste it on browser console to the groups.</p>
+<pre><code class="language-js">const names = [&#39;Asabeneh&#39;, &#39;Brook&#39;, &#39;David&#39;, &#39;John&#39;]
+const countries = [
+  [&#39;Finland&#39;, &#39;Helsinki&#39;],
+  [&#39;Sweden&#39;, &#39;Stockholm&#39;],
+  [&#39;Norway&#39;, &#39;Oslo&#39;]
+]
+const user = {
+  name: &#39;Asabeneh&#39;,
+  title: &#39;Programmer&#39;,
+  country: &#39;Finland&#39;,
+  city: &#39;Helsinki&#39;,
+  age: 250
+}
+const users = [
+  {
+    name: &#39;Asabeneh&#39;,
+    title: &#39;Programmer&#39;,
+    country: &#39;Finland&#39;,
+    city: &#39;Helsinki&#39;,
+    age: 250
+  },
+  {
+    name: &#39;Eyob&#39;,
+    title: &#39;Teacher&#39;,
+    country: &#39;Sweden&#39;,
+    city: &#39;London&#39;,
+    age: 25
+  },
+  {
+    name: &#39;Asab&#39;,
+    title: &#39;Instructor&#39;,
+    country: &#39;Norway&#39;,
+    city: &#39;Oslo&#39;,
+    age: 22
+  },
+  {
+    name: &#39;Matias&#39;,
+    title: &#39;Developer&#39;,
+    country: &#39;Denmark&#39;,
+    city: &#39;Copenhagen&#39;,
+    age: 28
+  }
+]
+
+console.group(&#39;Names&#39;)
+console.log(names)
+console.groupEnd()
+
+console.group(&#39;Countries&#39;)
+console.log(countries)
+console.groupEnd()
+
+console.group(&#39;Users&#39;)
+console.log(user)
+console.log(users)
+console.groupEnd()
+</code></pre>
+<h3 id="consolecount">console.count()</h3>
+<p>It prints the number of times the console.count() is called. It takes a string label parameter. It is very helpful to count the number of times a function is called. In the following example, the console.count() method will run three times</p>
+<pre><code class="language-js">const func = () =&gt; {
+  console.count(&#39;Function has been called&#39;)
+}
+func()
+func()
+func()
+</code></pre>
+<pre><code class="language-sh">Function has been called: 1
+Function has been called: 2
+Function has been called: 3
+</code></pre>
+<h3 id="consoleclear">console.clear()</h3>
+<p>The console.clear() cleans the browser console.</p>
+<p>🌕 Keep up the good work. Keep pushing, the sky is the limit! You have just completed day 13 challenges and you are 13 steps a head in to your way to greatness. Now do some exercises for your brain and for your muscle.</p>
+<h2 id="exercises">Exercises</h2>
+<h3 id="exerciseslevel-1">Exercises:Level 1</h3>
+<ol>
+<li>Display the countries array as a table</li>
+<li>Display the countries object as a table</li>
+<li>Use console.group() to group logs</li>
+</ol>
+<h3 id="exerciseslevel-2">Exercises:Level 2</h3>
+<ol>
+<li>10 &gt; 2 * 10 use console.assert()</li>
+<li>Write a warning message using console.warn()</li>
+<li>Write an error message using console.error()</li>
+</ol>
+<h3 id="exerciseslevel-3">Exercises:Level 3</h3>
+<ol>
+<li>Check the speed difference among the following loops: while, for, for of, forEach</li>
+</ol>
+<p>🎉 CONGRATULATIONS ! 🎉</p>
+<p><a href="../12_Day_Regular_expressions/12_day_regular_expressions.html">&lt;&lt; Day 12</a> | <a href="../14_Day_Error_handling/14_day_error_handling.html">Day 14&gt;&gt;</a></p>

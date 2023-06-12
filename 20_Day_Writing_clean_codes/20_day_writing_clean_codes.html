@@ -1,0 +1,295 @@
+
+
+<p><a href="../19_Day_Closures/19_day_closures.html">&lt;&lt; Day 19</a> | <a href="../21_Day_DOM/21_day_dom.html">Day 21 &gt;&gt;</a></p>
+<p><img src="../images/banners/day_1_20.png" alt="Thirty Days Of JavaScript"></p>
+<ul>
+<li><a href="#day-20">Day 20</a><ul>
+<li><a href="#writing-clean-code">Writing clean code</a><ul>
+<li><a href="#javascript-style-guide">JavaScript Style Guide</a></li>
+<li><a href="#why-we-need-style-guide">Why we need style guide</a><ul>
+<li><a href="#airbnb-javascript-style-guide">Airbnb JavaScript Style Guide</a></li>
+<li><a href="#standard-javascript-style-guide">Standard JavaScript Style Guide</a></li>
+<li><a href="#google-javascript-style-guide">Google JavaScript Style Guide</a></li>
+</ul>
+</li>
+<li><a href="#javascript-coding-conventions">JavaScript Coding Conventions</a><ul>
+<li><a href="#conventions-use-in-30daysofjavascript">Conventions use in 30DaysOfJavaScript</a></li>
+<li><a href="#variables">Variables</a></li>
+<li><a href="#arrays">Arrays</a></li>
+<li><a href="#functions">Functions</a></li>
+<li><a href="#loops">Loops</a></li>
+<li><a href="#objects">Objects</a></li>
+<li><a href="#conditional">Conditional</a></li>
+<li><a href="#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="day-20">Day 20</h1>
+<h2 id="writing-clean-code">Writing clean code</h2>
+<h3 id="javascript-style-guide">JavaScript Style Guide</h3>
+<p>A JavaScript style guide is a set of standards that tells how JavaScript code should be written and organized. In this section, we will talk about JavaScript guides and how to write a clean code.</p>
+<p>JavaScript is a programming language and like human language it has syntax. The syntax of JavaScript has to be written following a certain style guideline for sake of convince and simplicity.</p>
+<h3 id="why-we-need-style-guide">Why we need style guide</h3>
+<p>You have been coding alone for so long but now it seems to work in a team. It does not matter in anyway you write you code as long as it running, however when you work in team of 10 or 20 or more developer on one project and on the same code base, the code will be messy and hard to manage if there is no any guidelines to follow.</p>
+<p>You can develop your own guidelines and conventions or you can also adapt well developed guidelines. Let us the most common know guidelines.
+Most common JavaScript Style Guides</p>
+<ul>
+<li>Airbnb JavaScript Style Guide</li>
+<li>JavaScript Standard Style Guide</li>
+<li>Google JavaScript Style Guide</li>
+</ul>
+<h4 id="airbnb-javascript-style-guide">Airbnb JavaScript Style Guide</h4>
+<p>Airbnb has one of the most popular JavaScript style guides on the internet. It covers nearly every aspect of JavaScript as well  and it is adopted by many developer and companies. You may checkout the <a href="https://github.com/airbnb/javascript">Airbnb style guide</a>. I would also recommend to try it. Their style is very easy to use and simple to understand.</p>
+<h4 id="standard-javascript-style-guide">Standard JavaScript Style Guide</h4>
+<p>This is guideline is not as popular as Airbnb but it worth to look at it. They removed the semicolon in their <a href="https://standardjs.com/">style guide</a>.</p>
+<h4 id="google-javascript-style-guide">Google JavaScript Style Guide</h4>
+<p>I do not say much about Googles guideline and I did not use rather I would suggest you to have a look from this <a href="https://google.github.io/styleguide/jsguide.html">link</a>.</p>
+<h3 id="javascript-coding-conventions">JavaScript Coding Conventions</h3>
+<p>In this challenge also we used the general JavaScript coding writing conventions and guides. Coding conventions are style guidelines for programming which are developed by an individual, a team or a company.</p>
+<p>Coding conventions helps:</p>
+<ul>
+<li>to write clean code</li>
+<li>to improve code readability</li>
+<li>to improve code re-useability and maintainability</li>
+</ul>
+<p>Coding conventions includes</p>
+<ul>
+<li>Naming and declaration rules for variables</li>
+<li>Naming and declaration rules for functions</li>
+<li>Rules for the use of white space, indentation, and comments</li>
+<li>Programming practices and principles</li>
+</ul>
+<h4 id="conventions-use-in-30daysofjavascript">Conventions use in 30DaysOfJavaScript</h4>
+<p>In this challenge we follow the regular JavaScript convention but I added also my preference of writing. </p>
+<ul>
+<li>We used camelCase for variables and functions.</li>
+<li>All variable names start with a letter.</li>
+<li>We chose to use <em>const</em> for constants, arrays, objects and functions. In stead of double quote, we chose to use single quote or backtick. Single quote is becoming trendy.</li>
+<li>We also removed semicolons from our code but it is a matter of personal preference.</li>
+<li>Space around arithmetic operators, assignment operators and after comma</li>
+<li>Arrow function instead of function declaration</li>
+<li>Explicit return instead of implicit return if the function is one liner</li>
+<li>No trailing comma in the last value of an object</li>
+<li>We prefer this +=, -=, *= /=, **= instead of the longer version</li>
+<li>When we use console.log() it is good to print with a tag string to identify from where the console is coming</li>
+</ul>
+<h4 id="variables">Variables</h4>
+<pre><code class="language-js">
+let firstName = &#39;Asabeneh&#39;
+let lastName = &#39;Yetayeh&#39;
+let country = &#39;Finland&#39;
+let city = &#39;Helsinki&#39;
+
+const PI = Math.PI
+const gravity = 9.81
+</code></pre>
+<h4 id="arrays">Arrays</h4>
+<p>We chose to make array names plural</p>
+<ul>
+<li>names</li>
+<li>numbers</li>
+<li>countries</li>
+<li>languages</li>
+<li>skills</li>
+<li>fruits</li>
+<li>vegetables</li>
+</ul>
+<pre><code class="language-js">// arrays
+const names = [&#39;Asabeneh&#39;, &#39;Mathias&#39;, &#39;Elias&#39;, &#39;Brook&#39;]
+const numbers = [0, 3.14, 9.81, 37, 98.6, 100]
+const countries = [&#39;Finland&#39;, &#39;Denmark&#39;, &#39;Sweden&#39;, &#39;Norway&#39;, &#39;Iceland&#39;]
+const languages = [&#39;Amharic&#39;, &#39;Arabic&#39;, &#39;English&#39;, &#39;French&#39;, &#39;Spanish&#39;]
+const skills = [&#39;HTML&#39;, &#39;CSS&#39;, &#39;JavaScript&#39;, &#39;React&#39;, &#39;Python&#39;]
+const fruits = [&#39;banana&#39;, &#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;]
+const vegetables = [&#39;Tomato&#39;, &#39;Potato&#39;, &#39;Cabbage&#39;, &#39;Onion&#39;, &#39;Carrot&#39;]
+</code></pre>
+<h4 id="functions">Functions</h4>
+<p>By now you are very familiar function declaration, expression function, arrow function and anonymous function. In this challenge we tend to use arrow function instead of other functions. Arrow function is not a replacement for other functions. In addition, arrow functions and function declarations are not exactly the same. So you should know when to use and when not. I will cover the difference in detail in other sections. We will use explicit return instead of implicit return if the function is one liner</p>
+<pre><code class="language-js">// function which return full name of a person
+const printFullName = (firstName, lastName) =&gt; firstName + &#39; &#39; + lastName
+
+// function which calculates a square of a number
+const square = (n) =&gt; n * n
+
+// a function which generate random hexa colors
+const hexaColor = () =&gt; {
+  const str = &#39;0123456789abcdef&#39;
+  let hexa = &#39;#&#39;
+  let index
+  for (let i = 0; i &lt; 6; i++) {
+    index = Math.floor(Math.random() * str.length)
+    hexa += str[index]
+  }
+  return hexa
+}
+
+// a function which shows date and time
+const showDateTime = () =&gt; {
+  const now = new Date()
+  const year = now.getFullYear()
+  const month = now.getMonth() + 1
+  const date = now.getDate()
+  let hours = now.getHours()
+  let minutes = now.getMinutes()
+  if (hours &lt; 10) {
+    hours = &#39;0&#39; + hours
+  }
+  if (minutes &lt; 10) {
+    minutes = &#39;0&#39; + minutes
+  }
+
+  const dateMonthYear = date + &#39;.&#39; + month + &#39;.&#39; + year
+  const time = hours + &#39;:&#39; + minutes
+  const fullTime = dateMonthYear + &#39; &#39; + time
+  return fullTime
+}
+</code></pre>
+<p>The <code>new Dat().toLocaleString()</code> can also be used to display current date time. The <code>toLocaleString()</code> methods takes different arguments. You may learn more about date and time from this <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString">link</a>.</p>
+<h4 id="loops">Loops</h4>
+<p>We coverer many types of loops in this challenges. The regular for loop, while loop, do while loop, for of loop, forEach loop and for in loop.
+Lets see how we use them:</p>
+<pre><code class="language-js">for (let i = 0; i &lt; n; i++){
+    console.log()
+}
+
+// declaring an array variable
+const names = [&#39;Asabeneh&#39;, &#39;Mathias&#39;, &#39;Elias&#39;, &#39;Brook&#39;]
+
+// iterating an array using regular for loop
+let len = names.length;
+for(let i = 0; i &lt; len; i++){
+    console.log(names[i].toUpperCase())
+}
+
+
+// iterating an array using for of
+for( const name of names) {
+    console.log(name.toUpperCase())
+}
+
+// iterating array using forEach 
+names.forEach((name) =&gt; name.toUpperCase())
+
+
+const person = {
+  firstName: &#39;Asabeneh&#39;,
+  lastName: &#39;Yetayeh&#39;,
+  age: 250,
+  country: &#39;Finland&#39;,
+  city: &#39;Helsinki&#39;,
+  skills: [&#39;HTML&#39;,&#39;CSS&#39;,&#39;JavaScript&#39;,&#39;React&#39;,&#39;Node&#39;,&#39;MongoDB&#39;,&#39;Python&#39;,&#39;D3.js&#39;],
+  isMarried: true
+}
+for(const key in person) {
+    console.log(key)
+}
+</code></pre>
+<h4 id="objects">Objects</h4>
+<p>We declare object literal with <em>const</em>.</p>
+<pre><code class="language-js">// declaring object literal
+const person = {
+  firstName: &#39;Asabeneh&#39;,
+  lastName: &#39;Yetayeh&#39;,
+  age: 250,
+  country: &#39;Finland&#39;,
+  city: &#39;Helsinki&#39;,
+  skills: [&#39;HTML&#39;,&#39;CSS&#39;,&#39;JavaScript&#39;,&#39;TypeScript&#39;, &#39;React&#39;,&#39;Node&#39;,&#39;MongoDB&#39;,&#39;Python&#39;,&#39;D3.js&#39;],
+  isMarried: true
+}
+// iterating through object keys
+for(const key in person) {
+    console.log(key, person[key])
+}
+</code></pre>
+<h4 id="conditional">Conditional</h4>
+<p> We say if, if else, if else if else, switch and ternary operators in previous challenges.</p>
+<pre><code class="language-js">// syntax
+if (condition) {
+ // this part of code run for truthy condition
+} else {
+ // this part of code run for false condition
+}
+</code></pre>
+<pre><code class="language-js">// if else
+let num = 3
+if (num &gt; 0) {
+ console.log(`${num} is a positive number`)
+} else {
+ console.log(`${num} is a negative number`)
+}
+//  3 is a positive number
+</code></pre>
+<pre><code class="language-js">// if else if else if else
+
+let a = 0
+if (a &gt; 0) {
+ console.log(`${a} is a positive number`)
+} else if (a &lt; 0) {
+ console.log(`${a} is a negative number`)
+} else if (a == 0) {
+ console.log(`${a} is zero`)
+} else {
+ console.log(`${a} is not a number`)
+}
+</code></pre>
+<pre><code class="language-js">// Switch More Examples
+let dayUserInput = prompt(&#39;What day is today ?&#39;)
+let day = dayUserInput.toLowerCase()
+
+switch (day) {
+ case &#39;monday&#39;:
+   console.log(&#39;Today is Monday&#39;)
+   break
+ case &#39;tuesday&#39;:
+   console.log(&#39;Today is Tuesday&#39;)
+   break
+ case &#39;wednesday&#39;:
+   console.log(&#39;Today is Wednesday&#39;)
+   break
+ case &#39;thursday&#39;:
+   console.log(&#39;Today is Thursday&#39;)
+   break
+ case &#39;friday&#39;:
+   console.log(&#39;Today is Friday&#39;)
+   break
+ case &#39;saturday&#39;:
+   console.log(&#39;Today is Saturday&#39;)
+   break
+ case &#39;sunday&#39;:
+   console.log(&#39;Today is Sunday&#39;)
+   break
+ default:
+   console.log(&#39;It is not a week day.&#39;)
+}
+</code></pre>
+<pre><code class="language-js">// ternary
+
+let isRaining = true
+isRaining
+ ? console.log(&#39;You need a rain coat.&#39;)
+ : console.log(&#39;No need for a rain coat.&#39;)
+</code></pre>
+<h4 id="classes">Classes</h4>
+<p>We declare class with CamelCase which starts with capital letter.</p>
+<pre><code class="language-js">// syntax
+class ClassName {
+    // code goes here
+}
+</code></pre>
+<pre><code class="language-js">// defining class
+class Person {
+  constructor(firstName, lastName) {
+    console.log(this) // Check the output from here
+    this.firstName = firstName
+    this.lastName = lastName
+  }
+}
+</code></pre>
+<p>Whatever style guide you follow be consistent. Follow some programming paradigms and design patterns. Remember, if you do not write you code in certain order or fashion it will be hard to read your code. So, do a favor for yourself or for someone who is going to read your code by writing readable code.</p>
+<p>🌕 You are tidy. Now, you knew how to write clean code, so anyone who know the English language can understand your code.  You are always progressing and you are a head of 20 steps to your way to greatness.</p>
+<p>🎉 CONGRATULATIONS ! 🎉</p>
+<p><a href="../19_Day_Closuers/19_day_closures.html">&lt;&lt; Day 19</a> | <a href="../21_Day_DOM/21_day_dom.html">Day 21 &gt;&gt;</a></p>

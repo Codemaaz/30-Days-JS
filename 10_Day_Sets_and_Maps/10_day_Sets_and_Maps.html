@@ -1,0 +1,320 @@
+
+
+<p><a href="../09_Day_Higher_order_functions/09_day_higher_order_functions.html">&lt;&lt; Day 9</a> | <a href="../11_Day_Destructuring_and_spreading/11_day_destructuring_and_spreading.html">Day 11&gt;&gt;</a></p>
+<p><img src="../images/banners/day_1_10.png" alt="Day 10"></p>
+<ul>
+<li><a href="#day-10">Day 10</a><ul>
+<li><a href="#set">Set</a><ul>
+<li><a href="#creating-an-empty-set">Creating an empty set</a></li>
+<li><a href="#creating-set-from-array">Creating set from array</a></li>
+<li><a href="#adding-an-element-to-a-set">Adding an element to a set</a></li>
+<li><a href="#deleting-an-element-a-set">Deleting an element a set</a></li>
+<li><a href="#checking-an-element-in-the-set">Checking an element in the set</a></li>
+<li><a href="#clearing-the-set">Clearing the set</a></li>
+<li><a href="#union-of-sets">Union of sets</a></li>
+<li><a href="#intersection-of-sets">Intersection of sets</a></li>
+<li><a href="#difference-of-sets">Difference of sets</a></li>
+</ul>
+</li>
+<li><a href="#map">Map</a><ul>
+<li><a href="#creating-an-empty-map">Creating an empty Map</a></li>
+<li><a href="#creating-an-map-from-array">Creating an Map from array</a></li>
+<li><a href="#adding-values-to-the-map">Adding values to the Map</a></li>
+<li><a href="#getting-a-value-from-map">Getting a value from Map</a></li>
+<li><a href="#checking-key-in-map">Checking key in Map</a></li>
+</ul>
+</li>
+<li><a href="#exercises">Exercises</a><ul>
+<li><a href="#exerciseslevel-1">Exercises:Level 1</a></li>
+<li><a href="#exerciseslevel-2">Exercises:Level 2</a></li>
+<li><a href="#exerciseslevel-3">Exercises:Level 3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="day-10">Day 10</h1>
+<h2 id="set">Set</h2>
+<p>Set is  a collection of elements. Set can only contains unique elements.
+Let us see how to create a set in the section below.</p>
+<h3 id="creating-an-empty-set">Creating an empty set</h3>
+<pre><code class="language-js">const companies = new Set()
+console.log(companies)
+</code></pre>
+<pre><code class="language-sh">Set(0) {}
+</code></pre>
+<h3 id="creating-set-from-array">Creating set from array</h3>
+<pre><code class="language-js">const languages = [
+  &#39;English&#39;,
+  &#39;Finnish&#39;,
+  &#39;English&#39;,
+  &#39;French&#39;,
+  &#39;Spanish&#39;,
+  &#39;English&#39;,
+  &#39;French&#39;,
+]
+
+const setOfLanguages = new Set(languages)
+console.log(setOfLanguages)
+</code></pre>
+<pre><code class="language-sh">Set(4) {&quot;English&quot;, &quot;Finnish&quot;, &quot;French&quot;, &quot;Spanish&quot;}
+</code></pre>
+<p>Set is an iterable object and we can iterate through each elements.</p>
+<pre><code class="language-js">const languages = [
+  &#39;English&#39;,
+  &#39;Finnish&#39;,
+  &#39;English&#39;,
+  &#39;French&#39;,
+  &#39;Spanish&#39;,
+  &#39;English&#39;,
+  &#39;French&#39;,
+]
+
+const setOfLanguages = new Set(languages)
+
+for (const language of setOfLanguages) {
+  console.log(language)
+}
+</code></pre>
+<pre><code class="language-sh">  English
+  Finnish
+  French
+  Spanish
+</code></pre>
+<h3 id="adding-an-element-to-a-set">Adding an element to a set</h3>
+<pre><code class="language-js">const companies = new Set() // creating an empty set
+console.log(companies.size) // 0
+
+companies.add(&#39;Google&#39;) // add element to the set
+companies.add(&#39;Facebook&#39;)
+companies.add(&#39;Amazon&#39;)
+companies.add(&#39;Oracle&#39;)
+companies.add(&#39;Microsoft&#39;)
+console.log(companies.size) // 5 elements in the set
+console.log(companies)
+</code></pre>
+<pre><code class="language-sh">Set(5) {&quot;Google&quot;, &quot;Facebook&quot;, &quot;Amazon&quot;, &quot;Oracle&quot;, &quot;Microsoft&quot;}
+</code></pre>
+<p>We can also use loop to add element to a set.</p>
+<pre><code class="language-js">const companies = [&#39;Google&#39;, &#39;Facebook&#39;, &#39;Amazon&#39;, &#39;Oracle&#39;, &#39;Microsoft&#39;]
+setOfCompanies = new Set()
+for (const company of companies) {
+  setOfCompanies.add(company)
+}
+</code></pre>
+<pre><code class="language-sh">Set(5) {&quot;Google&quot;, &quot;Facebook&quot;, &quot;Amazon&quot;, &quot;Oracle&quot;, &quot;Microsoft&quot;}
+</code></pre>
+<h3 id="deleting-an-element-a-set">Deleting an element a set</h3>
+<p>We can delete an element from a set using a delete method.</p>
+<pre><code class="language-js">console.log(companies.delete(&#39;Google&#39;))
+console.log(companies.size) // 4 elements left in the set
+</code></pre>
+<h3 id="checking-an-element-in-the-set">Checking an element in the set</h3>
+<p>The has method can help to know if a certain element exists in a set.</p>
+<pre><code class="language-js">console.log(companies.has(&#39;Apple&#39;)) // false
+console.log(companies.has(&#39;Facebook&#39;)) // true
+</code></pre>
+<h3 id="clearing-the-set">Clearing the set</h3>
+<p>It removes all the elements from a set.</p>
+<pre><code class="language-js">companies.clear()
+console.log(companies)
+</code></pre>
+<pre><code class="language-sh">Set(0) {}
+</code></pre>
+<p>See the example below to learn how to use set.</p>
+<pre><code class="language-js">const languages = [
+  &#39;English&#39;,
+  &#39;Finnish&#39;,
+  &#39;English&#39;,
+  &#39;French&#39;,
+  &#39;Spanish&#39;,
+  &#39;English&#39;,
+  &#39;French&#39;,
+]
+const langSet = new Set(languages)
+console.log(langSet) // Set(4) {&quot;English&quot;, &quot;Finnish&quot;, &quot;French&quot;, &quot;Spanish&quot;}
+console.log(langSet.size) // 4
+
+const counts = []
+const count = {}
+
+for (const l of langSet) {
+  const filteredLang = languages.filter((lng) =&gt; lng === l)
+  console.log(filteredLang) // [&quot;English&quot;, &quot;English&quot;, &quot;English&quot;]
+  counts.push({ lang: l, count: filteredLang.length })
+}
+console.log(counts)
+</code></pre>
+<pre><code class="language-js">[
+  { lang: &#39;English&#39;, count: 3 },
+  { lang: &#39;Finnish&#39;, count: 1 },
+  { lang: &#39;French&#39;, count: 2 },
+  { lang: &#39;Spanish&#39;, count: 1 },
+]
+</code></pre>
+<p>Other use case of set. For instance to count unique item in an array.</p>
+<pre><code class="language-js">const numbers = [5, 3, 2, 5, 5, 9, 4, 5]
+const setOfNumbers = new Set(numbers)
+
+console.log(setOfNumbers)
+</code></pre>
+<pre><code class="language-sh">Set(5) {5, 3, 2, 9, 4}
+</code></pre>
+<h3 id="union-of-sets">Union of sets</h3>
+<p>To find a union to two sets can be achieved using spread operator. Lets find the union of set A and set B (A U B)</p>
+<pre><code class="language-js">let a = [1, 2, 3, 4, 5]
+let b = [3, 4, 5, 6]
+let c = [...a, ...b]
+
+let A = new Set(a)
+let B = new Set(b)
+let C = new Set(c)
+
+console.log(C)
+</code></pre>
+<pre><code class="language-sh">Set(6) {1, 2, 3, 4, 5,6}
+</code></pre>
+<h3 id="intersection-of-sets">Intersection of sets</h3>
+<p>To find an intersection of two sets can be achieved using filter. Lets find the intersection of set A and set B (A ∩ B)</p>
+<pre><code class="language-js">let a = [1, 2, 3, 4, 5]
+let b = [3, 4, 5, 6]
+
+let A = new Set(a)
+let B = new Set(b)
+
+let c = a.filter((num) =&gt; B.has(num))
+let C = new Set(c)
+
+console.log(C)
+</code></pre>
+<pre><code class="language-sh">Set(3) {3, 4, 5}
+</code></pre>
+<h3 id="difference-of-sets">Difference of sets</h3>
+<p>To find an the difference between two sets can be achieved using filter. Lets find the different of set A and set B (A \ B)</p>
+<pre><code class="language-js">let a = [1, 2, 3, 4, 5]
+let b = [3, 4, 5, 6]
+
+let A = new Set(a)
+let B = new Set(b)
+
+let c = a.filter((num) =&gt; !B.has(num))
+let C = new Set(c)
+
+console.log(C)
+</code></pre>
+<pre><code class="language-sh">Set(2) {1, 2}
+</code></pre>
+<h2 id="map">Map</h2>
+<h3 id="creating-an-empty-map">Creating an empty Map</h3>
+<pre><code class="language-js">const map = new Map()
+console.log(map)
+</code></pre>
+<pre><code class="language-sh">Map(0) {}
+</code></pre>
+<h3 id="creating-an-map-from-array">Creating an Map from array</h3>
+<pre><code class="language-js">countries = [
+  [&#39;Finland&#39;, &#39;Helsinki&#39;],
+  [&#39;Sweden&#39;, &#39;Stockholm&#39;],
+  [&#39;Norway&#39;, &#39;Oslo&#39;],
+]
+const map = new Map(countries)
+console.log(map)
+console.log(map.size)
+</code></pre>
+<pre><code class="language-sh">Map(3) {&quot;Finland&quot; =&gt; &quot;Helsinki&quot;, &quot;Sweden&quot; =&gt; &quot;Stockholm&quot;, &quot;Norway&quot; =&gt; &quot;Oslo&quot;}
+3
+</code></pre>
+<h3 id="adding-values-to-the-map">Adding values to the Map</h3>
+<pre><code class="language-js">const countriesMap = new Map()
+console.log(countriesMap.size) // 0
+countriesMap.set(&#39;Finland&#39;, &#39;Helsinki&#39;)
+countriesMap.set(&#39;Sweden&#39;, &#39;Stockholm&#39;)
+countriesMap.set(&#39;Norway&#39;, &#39;Oslo&#39;)
+console.log(countriesMap)
+console.log(countriesMap.size)
+</code></pre>
+<pre><code class="language-sh">Map(3) {&quot;Finland&quot; =&gt; &quot;Helsinki&quot;, &quot;Sweden&quot; =&gt; &quot;Stockholm&quot;, &quot;Norway&quot; =&gt; &quot;Oslo&quot;}
+3
+</code></pre>
+<h3 id="getting-a-value-from-map">Getting a value from Map</h3>
+<pre><code class="language-js">console.log(countriesMap.get(&#39;Finland&#39;))
+</code></pre>
+<pre><code class="language-sh">Helsinki
+</code></pre>
+<h3 id="checking-key-in-map">Checking key in Map</h3>
+<p>Check if a key exists in a map using <em>has</em> method. It returns <em>true</em> or <em>false</em>.</p>
+<pre><code class="language-js">console.log(countriesMap.has(&#39;Finland&#39;))
+</code></pre>
+<pre><code class="language-sh">true
+</code></pre>
+<p>Getting all values from map using loop</p>
+<pre><code class="language-js">for (const country of countriesMap) {
+  console.log(country)
+}
+</code></pre>
+<pre><code class="language-sh">(2) [&quot;Finland&quot;, &quot;Helsinki&quot;]
+(2) [&quot;Sweden&quot;, &quot;Stockholm&quot;]
+(2) [&quot;Norway&quot;, &quot;Oslo&quot;]
+</code></pre>
+<pre><code class="language-js">for (const [country, city] of countriesMap){
+ console.log(country, city)
+}
+</code></pre>
+<pre><code class="language-sh">Finland Helsinki
+Sweden Stockholm
+Norway Oslo
+</code></pre>
+<p>🌕 You established a big milestone, you are unstoppable. Keep going! You have just completed day 10 challenges and you are 10 steps a head in to your way to greatness. Now do some exercises for your brain and for your muscle.</p>
+<h2 id="exercises">Exercises</h2>
+<h3 id="exerciseslevel-1">Exercises:Level 1</h3>
+<pre><code class="language-js">const a = [4, 5, 8, 9]
+const b = [3, 4, 5, 7]
+const countries = [&#39;Finland&#39;, &#39;Sweden&#39;, &#39;Norway&#39;]
+</code></pre>
+<ol>
+<li>create an empty set</li>
+<li>Create a set containing 0 to 10 using loop</li>
+<li>Remove an element from a set</li>
+<li>Clear a set</li>
+<li>Create a set of 5 string elements from array</li>
+<li>Create a map of countries and number of characters of a country</li>
+</ol>
+<h3 id="exerciseslevel-2">Exercises:Level 2</h3>
+<ol>
+<li>Find a union b</li>
+<li>Find a intersection b</li>
+<li>Find a with b</li>
+</ol>
+<h3 id="exerciseslevel-3">Exercises:Level 3</h3>
+<ol>
+<li><p>How many languages are there in the countries object file.</p>
+</li>
+<li><p>*** Use the countries data to find the 10 most spoken languages:</p>
+</li>
+</ol>
+<pre><code class="language-js">   // Your output should look like this
+   console.log(mostSpokenLanguages(countries, 10))
+   [
+     { English: 91 },
+     { French: 45 },
+     { Arabic: 25 },
+     { Spanish: 24 },
+     { Russian: 9 },
+     { Portuguese: 9 },
+     { Dutch: 8 },
+     { German: 7 },
+     { Chinese: 5 },
+     { Swahili: 4 },
+     { Serbian: 4 }
+   ]
+
+  // Your output should look like this
+  console.log(mostSpokenLanguages(countries, 3))
+  [
+  {English:91},
+  {French:45},
+  {Arabic:25}
+  ]
+</code></pre>
+<p>🎉 CONGRATULATIONS ! 🎉</p>
+<p><a href="../09_Day_Higher_order_functions/09_day_higher_order_functions.md">&lt;&lt; Day 9</a> | <a href="../11_Day_Destructuring_and_spreading/11_day_destructuring_and_spreading.md">Day 11 &gt;&gt;</a></p>

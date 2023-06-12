@@ -1,0 +1,80 @@
+
+  
+  <p><a href="../18_Day_Promises/18_day_promises.html">&lt;&lt; Day 18</a> | <a href="../20_Day_Writing_clean_codes/20_day_writing_clean_codes.html">Day 20 &gt;&gt;</a></p>
+  <p><img src="../images/banners/day_1_19.png" alt="Thirty Days Of JavaScript"></p>
+  <ul>
+  <li><a href="#day-19">Day 19</a><ul>
+  <li><a href="#closure">Closure</a></li>
+  <li><a href="#exercises">Exercises</a><ul>
+  <li><a href="#exercises-level-1">Exercises: Level 1</a></li>
+  <li><a href="#exercises-level-2">Exercises: Level 2</a></li>
+  <li><a href="#exercises-level-3">Exercises: Level 3</a></li>
+  </ul>
+  </li>
+  </ul>
+  </li>
+  </ul>
+  <h1 id="day-19">Day 19</h1>
+  <h2 id="closure">Closure</h2>
+  <p>JavaScript allows writing function inside an outer function. We can write as many inner functions as we want. If inner function access the variables of outer function then it is called closure.</p>
+  <pre><code class="language-js">function outerFunction() {
+      let count = 0;
+      function innerFunction() {
+          count++
+          return count
+      }
+  
+      return innerFunction
+  }
+  const innerFunc = outerFunction()
+  
+  console.log(innerFunc())
+  console.log(innerFunc())
+  console.log(innerFunc())
+  </code></pre>
+  <pre><code class="language-sh">1
+  2
+  3
+  </code></pre>
+  <p>Let us more example of inner functions</p>
+  <pre><code class="language-js">function outerFunction() {
+      let count = 0;
+      function plusOne() {
+          count++
+          return count
+      }
+      function minusOne() {
+          count--
+          return count
+      }
+  
+      return {
+          plusOne:plusOne(),
+          minusOne:minusOne()
+      }
+  }
+  const innerFuncs = outerFunction()
+  
+  console.log(innerFuncs.plusOne)
+  console.log(innerFuncs.minusOne)
+  </code></pre>
+  <pre><code class="language-sh">1
+  0
+  </code></pre>
+  <p>🌕 You are making progress. Maintain your momentum,  keep the good work.  Now do some exercises for your brain and for your muscle.</p>
+  <h2 id="exercises">Exercises</h2>
+  <h3 id="exercises-level-1">Exercises: Level 1</h3>
+  <ol>
+  <li>Create a closure which has one inner function</li>
+  </ol>
+  <h3 id="exercises-level-2">Exercises: Level 2</h3>
+  <ol>
+  <li>Create a closure which has three inner functions</li>
+  </ol>
+  <h3 id="exercises-level-3">Exercises: Level 3</h3>
+  <ol>
+  <li>Create a personAccount out function. It has firstname, lastname, incomes, expenses  inner variables. It has totalIncome, totalExpense, accountInfo,addIncome, addExpense and accountBalance inner functions. Incomes is a set of incomes and its description and expenses is also a set of expenses and its description.</li>
+  </ol>
+  <p>🎉 CONGRATULATIONS ! 🎉</p>
+  <p><a href="../18_Day_Promises/18_day_promises.html">&lt;&lt; Day 18</a> | <a href="../20_Day_Writing_clean_codes/20_day_writing_clean_codes.html">Day 20 &gt;&gt;</a></p>
+  

@@ -1,0 +1,133 @@
+
+<p><a href="../13_Day_Console_object_methods/13_day_console_object_methods.html">&lt;&lt; Day 13</a> | <a href="../15_Day_Classes/15_day_classes.html">Day 15&gt;&gt;</a></p>
+<p><img src="../images/banners/day_1_14.png" alt="Thirty Days Of JavaScript"></p>
+<ul>
+<li><a href="#day-14">Day 14</a><ul>
+<li><a href="#error-handling">Error Handling</a><ul>
+<li><a href="#error-types">Error Types</a></li>
+</ul>
+</li>
+<li><a href="#exercises">Exercises</a><ul>
+<li><a href="#exerciseslevel-1">Exercises:Level 1</a></li>
+<li><a href="#exercises-level-2">Exercises: Level 2</a></li>
+<li><a href="#exerciseslevel">Exercises:Level</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="day-14">Day 14</h1>
+<h2 id="error-handling">Error Handling</h2>
+<p>JavaScript is a loosely-typed language. Some times you will get a runtime error when you try to access an undefined variable or call undefined function etc.</p>
+<p>JavaScript similar to python or Java provides an error-handling mechanism to catch runtime errors using try-catch-finally block.</p>
+<pre><code class="language-js">try {
+  // code that may throw an error
+} catch (err) {
+  // code to be executed if an error occurs
+} finally {
+  // code to be executed regardless of an error occurs or not
+}
+</code></pre>
+<p><strong>try</strong>: wrap suspicious code that may throw an error in try block.The try statement allows us to define a block of code to be tested for errors while it is being executed.</p>
+<p><strong>catch</strong>: write code to do something in catch block when an error occurs. The catch block can have parameters that will give you error information. Catch block is used to log an error or display specific messages to the user.</p>
+<p><strong>finally</strong>: finally block will always be executed regardless of the occurrence of an error. The finally block can be used to complete the remaining task or reset variables that might have changed before error occurred in try block.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-js">try {
+  let lastName = &#39;Yetayeh&#39;
+  let fullName = fistName + &#39; &#39; + lastName
+} catch (err) {
+  console.log(err)
+}
+</code></pre>
+<pre><code class="language-sh">ReferenceError: fistName is not defined
+    at &lt;anonymous&gt;:4:20
+</code></pre>
+<pre><code class="language-js">try {
+  let lastName = &#39;Yetayeh&#39;
+  let fullName = fistName + &#39; &#39; + lastName
+} catch (err) {
+  console.error(err) // we can use console.log() or console.error()
+} finally {
+  console.log(&#39;In any case I will be executed&#39;)
+}
+</code></pre>
+<pre><code class="language-sh">ReferenceError: fistName is not defined
+    at &lt;anonymous&gt;:4:20
+In any case it  will be executed
+</code></pre>
+<p>The catch block take a parameter. It is common to pass e, err or error as a parameter to the catch block. This parameter is an object and it has name and message keys. Lets use the name and message.</p>
+<pre><code class="language-js">try {
+  let lastName = &#39;Yetayeh&#39;
+  let fullName = fistName + &#39; &#39; + lastName
+} catch (err) {
+  console.log(&#39;Name of the error&#39;, err.name)
+  console.log(&#39;Error message&#39;, err.message)
+} finally {
+  console.log(&#39;In any case I will be executed&#39;)
+}
+</code></pre>
+<pre><code class="language-sh">Name of the error ReferenceError
+Error message fistName is not defined
+In any case I will be executed
+</code></pre>
+<p>throw: the throw statement allows us to create a custom error. We can through a string, number, boolean or an object. Use the throw statement to throw an exception. When you throw an exception, expression specifies the value of the exception. Each of the following throws an exception:</p>
+<pre><code class="language-js">throw &#39;Error2&#39; // generates an exception with a string value
+throw 42 // generates an exception with the value 42
+throw true // generates an exception with the value true
+throw new Error(&#39;Required&#39;) // generates an error object with the message of Required
+</code></pre>
+<pre><code class="language-js">const throwErrorExampleFun = () =&gt; {
+  let message
+  let x = prompt(&#39;Enter a number: &#39;)
+  try {
+    if (x == &#39;&#39;) throw &#39;empty&#39;
+    if (isNaN(x)) throw &#39;not a number&#39;
+    x = Number(x)
+    if (x &lt; 5) throw &#39;too low&#39;
+    if (x &gt; 10) throw &#39;too high&#39;
+  } catch (err) {
+    console.log(err)
+  }
+}
+throwErrorExampleFun()
+</code></pre>
+<h3 id="error-types">Error Types</h3>
+<ul>
+<li>ReferenceError: An illegal reference has occurred. A ReferenceError is thrown if we use a variable that has not been declared.</li>
+</ul>
+<pre><code class="language-js">let firstName = &#39;Asabeneh&#39;
+let fullName = firstName + &#39; &#39; + lastName
+console.log(fullName)
+</code></pre>
+<pre><code class="language-sh">Uncaught ReferenceError: lastName is not defined
+    at &lt;anonymous&gt;:2:35
+</code></pre>
+<ul>
+<li>SyntaxError: A syntax error has occurred</li>
+</ul>
+<pre><code class="language-js">let square = 2 x 2
+console.log(square)
+console.log(&#39;Hello, world&quot;)
+</code></pre>
+<pre><code class="language-sh">Uncaught SyntaxError: Unexpected identifier
+</code></pre>
+<ul>
+<li>TypeError: A type error has occurred</li>
+</ul>
+<pre><code class="language-js">let num = 10
+console.log(num.toLowerCase())
+</code></pre>
+<pre><code class="language-sh">Uncaught TypeError: num.toLowerCase is not a function
+    at &lt;anonymous&gt;:2:17
+</code></pre>
+<p>These are some of the common error you may face when you write a code. Understanding errors can help you to know what mistakes you made and it will help you to debug your code fast.
+🌕 You are flawless. Now, you knew how to handle errors and you can write robust application which handle unexpected user inputs. You have just completed day 14 challenges and you are 14 steps a head in to your way to greatness. Now do some exercises for your brain and for your muscle.</p>
+<h2 id="exercises">Exercises</h2>
+<h3 id="exerciseslevel-1">Exercises:Level 1</h3>
+<p>Practice</p>
+<h3 id="exercises-level-2">Exercises: Level 2</h3>
+<p>Practice</p>
+<h3 id="exerciseslevel">Exercises:Level</h3>
+<p>Practice
+🎉 CONGRATULATIONS ! 🎉
+<a href="../13_Day_Console_object_methods/13_day_console_object_methods.html">&lt;&lt; Day 13</a> | <a href="../15_Day_Classes/15_day_classes.html">Day 15&gt;&gt;</a></p>

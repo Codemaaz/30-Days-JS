@@ -1,0 +1,394 @@
+
+
+<p><a href="../05_Day_Arrays/05_day_arrays.html">&lt;&lt; Day 5</a> | <a href="../07_Day_Functions/07_day_functions.html">Day 7 &gt;&gt;</a></p>
+<p><img src="../images/banners/day_1_6.png" alt="Day 5"></p>
+<ul>
+<li><a href="#-day-6">📔 Day 6</a><ul>
+<li><a href="#loops">Loops</a><ul>
+<li><a href="#for-loop">for Loop</a></li>
+<li><a href="#while-loop">while loop</a></li>
+<li><a href="#do-while-loop">do while loop</a></li>
+<li><a href="#for-of-loop">for of loop</a></li>
+<li><a href="#break">break</a></li>
+<li><a href="#continue">continue</a></li>
+</ul>
+</li>
+<li><a href="#-exercisesday-6">💻 Exercises:Day 6</a><ul>
+<li><a href="#exercises-level-1">Exercises: Level 1</a></li>
+<li><a href="#exercises-level-2">Exercises: Level 2</a></li>
+<li><a href="#exercises-level-3">Exercises: Level 3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="📔-day-6">📔 Day 6</h1>
+<h2 id="loops">Loops</h2>
+<p>Most of the activities we do in life are full of repetitions. Imagine if I ask you to print out from 0 to 100 using console.log(). To implement this simple task it may take you 2 to 5 minutes, such kind of tedious and repetitive task can be carried out using loop. If you prefer watching the videos, you can checkout the <a href="https://www.youtube.com/channel/UCM4xOopkYiPwJqyKsSqL9mw">video tutorials</a></p>
+<p>In programming languages to carry out repetitive task we use different kinds of loops. The following examples are the commonly used loops in JavaScript and other programming languages.</p>
+<h3 id="for-loop">for Loop</h3>
+<pre><code class="language-js">// For loop structure
+for(initialization, condition, increment/decrement){
+  // code goes here
+}
+</code></pre>
+<pre><code class="language-js">for(let i = 0; i &lt;= 5; i++){
+  console.log(i)
+}
+
+// 0 1 2 3 4 5
+</code></pre>
+<pre><code class="language-js">for(let i = 5; i &gt;= 0; i--){
+  console.log(i)
+}
+
+// 5 4 3 2 1 0
+</code></pre>
+<pre><code class="language-js">for(let i = 0; i &lt;= 5; i++){
+  console.log(`${i} * ${i} = ${i * i}`)
+}
+</code></pre>
+<pre><code class="language-sh">0 * 0 = 0
+1 * 1 = 1
+2 * 2 = 4
+3 * 3 = 9
+4 * 4 = 16
+5 * 5 = 25
+</code></pre>
+<pre><code class="language-js">const countries = [&#39;Finland&#39;, &#39;Sweden&#39;, &#39;Denmark&#39;, &#39;Norway&#39;, &#39;Iceland&#39;]
+const newArr = []
+for(let i = 0; i &lt; countries.length; i++){
+  newArr.push(countries[i].toUpperCase())
+}
+
+// [&quot;FINLAND&quot;, &quot;SWEDEN&quot;, &quot;DENMARK&quot;, &quot;NORWAY&quot;, &quot;ICELAND&quot;]
+</code></pre>
+<p>Adding all elements in the array</p>
+<pre><code class="language-js">const numbers = [1, 2, 3, 4, 5]
+let sum = 0
+for(let i = 0; i &lt; numbers.length; i++){
+  sum  = sum + numbers[i]  // can be shorten, sum += numbers[i]
+
+}
+
+console.log(sum)  // 15
+</code></pre>
+<p>Creating a new array based on the existing array</p>
+<pre><code class="language-js">const numbers = [1, 2, 3, 4, 5]
+const newArr = []
+let sum = 0
+for(let i = 0; i &lt; numbers.length; i++){
+  newArr.push( numbers[i] ** 2)
+
+}
+
+console.log(newArr)  // [1, 4, 9, 16, 25]
+</code></pre>
+<pre><code class="language-js">const countries = [&#39;Finland&#39;, &#39;Sweden&#39;, &#39;Norway&#39;, &#39;Denmark&#39;, &#39;Iceland&#39;]
+const newArr = []
+for(let i = 0; i &lt; countries.length; i++){
+  newArr.push(countries[i].toUpperCase())
+}
+
+console.log(newArr)  // [&quot;FINLAND&quot;, &quot;SWEDEN&quot;, &quot;NORWAY&quot;, &quot;DENMARK&quot;, &quot;ICELAND&quot;]
+</code></pre>
+<h3 id="while-loop">while loop</h3>
+<pre><code class="language-js">let i = 0
+while (i &lt;= 5) {
+  console.log(i)
+  i++
+}
+
+// 0 1 2 3 4 5
+</code></pre>
+<h3 id="do-while-loop">do while loop</h3>
+<pre><code class="language-js">let i = 0
+do {
+  console.log(i)
+  i++
+} while (i &lt;= 5)
+
+// 0 1 2 3 4 5
+</code></pre>
+<h3 id="for-of-loop">for of loop</h3>
+<p>We use for of loop for arrays. It is very hand way to iterate through an array if we are not interested in the index of each element in the array.</p>
+<pre><code class="language-js">for (const element of arr) {
+  // code goes here
+}
+</code></pre>
+<pre><code class="language-js">
+const numbers = [1, 2, 3, 4, 5]
+
+for (const num of numbers) {
+  console.log(num)
+}
+
+// 1 2 3 4 5
+
+for (const num of numbers) {
+  console.log(num * num)
+}
+
+// 1 4 9 16 25
+
+// adding all the numbers in the array
+let sum = 0
+for (const num of numbers) {
+  sum = sum + num  
+    // can be also shorten like this, sum += num
+  // after this we will use the shorter synthax(+=, -=, *=, /= etc)
+}
+console.log(sum) // 15
+
+const webTechs = [
+  &#39;HTML&#39;,
+  &#39;CSS&#39;,
+  &#39;JavaScript&#39;,
+  &#39;React&#39;,
+  &#39;Redux&#39;,
+  &#39;Node&#39;,
+  &#39;MongoDB&#39;
+]
+
+for (const tech of webTechs) {
+  console.log(tech.toUpperCase())
+}
+
+// HTML CSS JAVASCRIPT REACT NODE MONGODB
+
+for (const tech of webTechs) {
+  console.log(tech[0]) // get only the first letter of each element,  H C J R N M
+}
+</code></pre>
+<pre><code class="language-js">const countries = [&#39;Finland&#39;, &#39;Sweden&#39;, &#39;Norway&#39;, &#39;Denmark&#39;, &#39;Iceland&#39;]
+const newArr = []
+for(const country of countries){
+  newArr.push(country.toUpperCase())
+}
+
+console.log(newArr)  // [&quot;FINLAND&quot;, &quot;SWEDEN&quot;, &quot;NORWAY&quot;, &quot;DENMARK&quot;, &quot;ICELAND&quot;]
+</code></pre>
+<h3 id="break">break</h3>
+<p>Break is used to interrupt a loop.</p>
+<pre><code class="language-js">for(let i = 0; i &lt;= 5; i++){
+  if(i == 3){
+    break
+  }
+  console.log(i)
+}
+
+// 0 1 2
+</code></pre>
+<p>The above code stops if 3 found in the iteration process.</p>
+<h3 id="continue">continue</h3>
+<p>We use the keyword <em>continue</em> to skip a certain iterations. </p>
+<pre><code class="language-js">for(let i = 0; i &lt;= 5; i++){
+  if(i == 3){
+    continue
+  }
+  console.log(i)
+}
+
+// 0 1 2 4 5
+</code></pre>
+<p>🌕 You are so brave, you made it to this far. Now, you have gained the power to automate repetitive and tedious tasks. You have just completed day 6 challenges and you are 6 steps a head in to your way to greatness. Now do some exercises for your brain and for your muscle.</p>
+<h2 id="💻-exercisesday-6">💻 Exercises:Day 6</h2>
+<h3 id="exercises-level-1">Exercises: Level 1</h3>
+<pre><code class="language-js">const countries = [
+  &#39;Albania&#39;,
+  &#39;Bolivia&#39;,
+  &#39;Canada&#39;,
+  &#39;Denmark&#39;,
+  &#39;Ethiopia&#39;,
+  &#39;Finland&#39;,
+  &#39;Germany&#39;,
+  &#39;Hungary&#39;,
+  &#39;Ireland&#39;,
+  &#39;Japan&#39;,
+  &#39;Kenya&#39;
+]
+
+const webTechs = [
+  &#39;HTML&#39;,
+  &#39;CSS&#39;,
+  &#39;JavaScript&#39;,
+  &#39;React&#39;,
+  &#39;Redux&#39;,
+  &#39;Node&#39;,
+  &#39;MongoDB&#39;
+]
+
+const mernStack = [&#39;MongoDB&#39;, &#39;Express&#39;, &#39;React&#39;, &#39;Node&#39;]
+</code></pre>
+<ol>
+<li><p>Iterate 0 to 10 using for loop, do the same using while and do while loop</p>
+</li>
+<li><p>Iterate 10 to 0 using for loop, do the same using while and do while loop</p>
+</li>
+<li><p>Iterate 0 to n using for loop</p>
+</li>
+<li><p>Write a loop that makes the following pattern using console.log():</p>
+<pre><code class="language-js">    #
+    ##
+    ###
+    ####
+    #####
+    ######
+    #######
+</code></pre>
+</li>
+<li><p>Use loop to print the following pattern:</p>
+<pre><code class="language-sh">0 x 0 = 0
+1 x 1 = 1
+2 x 2 = 4
+3 x 3 = 9
+4 x 4 = 16
+5 x 5 = 25
+6 x 6 = 36
+7 x 7 = 49
+8 x 8 = 64
+9 x 9 = 81
+10 x 10 = 100
+</code></pre>
+</li>
+<li><p>Using loop print the following pattern</p>
+<pre><code class="language-sh"> i    i^2   i^3
+ 0    0     0
+ 1    1     1
+ 2    4     8
+ 3    9     27
+ 4    16    64
+ 5    25    125
+ 6    36    216
+ 7    49    343
+ 8    64    512
+ 9    81    729
+ 10   100   1000
+</code></pre>
+</li>
+<li><p>Use for loop to iterate from 0 to 100 and print only even numbers</p>
+</li>
+<li><p>Use for loop to iterate from 0 to 100 and print only odd numbers</p>
+</li>
+<li><p>Use for loop to iterate from 0 to 100 and print only prime numbers</p>
+</li>
+<li><p>Use for loop to iterate from 0 to 100 and print the sum of all numbers.</p>
+<pre><code class="language-sh">The sum of all numbers from 0 to 100 is 5050.
+</code></pre>
+</li>
+<li><p>Use for loop to iterate from 0 to 100 and print the sum of all evens and the sum of all odds.</p>
+<pre><code class="language-sh">The sum of all evens from 0 to 100 is 2550. And the sum of all odds from 0 to 100 is 2500.
+</code></pre>
+</li>
+<li><p>Use for loop to iterate from 0 to 100 and print the sum of all evens and the sum of all odds. Print sum of evens and sum of odds as array</p>
+<pre><code class="language-sh">  [2550, 2500]
+</code></pre>
+</li>
+<li><p>Develop a small script which generate array of 5 random numbers</p>
+</li>
+<li><p>Develop a small script which generate array of 5 random numbers and the numbers must be unique</p>
+</li>
+<li><p>Develop a small script which generate a six characters random id:</p>
+<pre><code class="language-sh">5j2khz
+</code></pre>
+</li>
+</ol>
+<h3 id="exercises-level-2">Exercises: Level 2</h3>
+<ol>
+<li><p>Develop a small script which generate any number of characters random id:</p>
+<pre><code class="language-sh">  fe3jo1gl124g
+</code></pre>
+<pre><code class="language-sh">  xkqci4utda1lmbelpkm03rba
+</code></pre>
+</li>
+<li><p>Write a script which generates a random hexadecimal number.</p>
+<pre><code class="language-sh">&#39;#ee33df&#39;
+</code></pre>
+</li>
+<li><p>Write a script which generates a random rgb color number.</p>
+<pre><code class="language-sh">rgb(240,180,80)
+</code></pre>
+</li>
+<li><p>Using the above countries array, create the following new array.</p>
+<pre><code class="language-sh">[&quot;ALBANIA&quot;, &quot;BOLIVIA&quot;, &quot;CANADA&quot;, &quot;DENMARK&quot;, &quot;ETHIOPIA&quot;, &quot;FINLAND&quot;, &quot;GERMANY&quot;, &quot;HUNGARY&quot;, &quot;IRELAND&quot;, &quot;JAPAN&quot;, &quot;KENYA&quot;]
+</code></pre>
+</li>
+<li><p>Using the above countries array, create an array for countries length&#39;.</p>
+<pre><code class="language-sh">[7, 7, 6, 7, 8, 7, 7, 7, 7, 5, 5]
+</code></pre>
+</li>
+<li><p>Use the countries array to create the following array of arrays:</p>
+<pre><code class="language-sh">  [
+  [&#39;Albania&#39;, &#39;ALB&#39;, 7],
+  [&#39;Bolivia&#39;, &#39;BOL&#39;, 7],
+  [&#39;Canada&#39;, &#39;CAN&#39;, 6],
+  [&#39;Denmark&#39;, &#39;DEN&#39;, 7],
+  [&#39;Ethiopia&#39;, &#39;ETH&#39;, 8],
+  [&#39;Finland&#39;, &#39;FIN&#39;, 7],
+  [&#39;Germany&#39;, &#39;GER&#39;, 7],
+  [&#39;Hungary&#39;, &#39;HUN&#39;, 7],
+  [&#39;Ireland&#39;, &#39;IRE&#39;, 7],
+  [&#39;Iceland&#39;, &#39;ICE&#39;, 7],
+  [&#39;Japan&#39;, &#39;JAP&#39;, 5],
+  [&#39;Kenya&#39;, &#39;KEN&#39;, 5]
+]
+</code></pre>
+</li>
+<li><p>In above countries array, check if there is a country or countries containing the word &#39;land&#39;. If there are countries containing &#39;land&#39;, print it as array. If there is no country containing the word &#39;land&#39;, print &#39;All these countries are without land&#39;.</p>
+<pre><code class="language-sh">[&#39;Finland&#39;,&#39;Ireland&#39;, &#39;Iceland&#39;]
+</code></pre>
+</li>
+<li><p>In above countries array, check if there is  a country or countries end with a substring &#39;ia&#39;. If there are countries end with, print it as array. If there is no country containing the word &#39;ai&#39;, print &#39;These are countries ends without ia&#39;.</p>
+<pre><code class="language-sh">[&#39;Albania&#39;, &#39;Bolivia&#39;,&#39;Ethiopia&#39;]
+</code></pre>
+</li>
+<li><p>Using the above countries array, find the country containing the biggest number of characters.</p>
+<pre><code class="language-sh">Ethiopia
+</code></pre>
+</li>
+<li><p>Using the above countries array, find the country containing only 5 characters.</p>
+<pre><code class="language-sh">[&#39;Japan&#39;, &#39;Kenya&#39;]
+</code></pre>
+</li>
+<li><p>Find the longest word in the webTechs array</p>
+</li>
+<li><p>Use the webTechs array to create the following array of arrays:</p>
+<pre><code class="language-sh">[[&quot;HTML&quot;, 4], [&quot;CSS&quot;, 3],[&quot;JavaScript&quot;, 10],[&quot;React&quot;, 5],[&quot;Redux&quot;, 5],[&quot;Node&quot;, 4],[&quot;MongoDB&quot;, 7]]
+</code></pre>
+</li>
+<li><p>An application created using MongoDB, Express, React and Node is called a MERN stack app. Create the acronym MERN by using the array mernStack</p>
+</li>
+<li><p>Iterate through the array, [&quot;HTML&quot;, &quot;CSS&quot;, &quot;JS&quot;, &quot;React&quot;, &quot;Redux&quot;, &quot;Node&quot;, &quot;Express&quot;, &quot;MongoDB&quot;] using a for loop or for of loop and print out the items.</p>
+</li>
+<li><p>This is a fruit array , [&#39;banana&#39;, &#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;] reverse the order using loop without using a reverse method.</p>
+</li>
+<li><p>Print all the elements of array as shown below.</p>
+<pre><code class="language-js">  const fullStack = [
+    [&#39;HTML&#39;, &#39;CSS&#39;, &#39;JS&#39;, &#39;React&#39;],
+    [&#39;Node&#39;, &#39;Express&#39;, &#39;MongoDB&#39;]
+  ]
+</code></pre>
+<pre><code class="language-sh">  HTML
+  CSS
+  JS
+  REACT
+  NODE
+  EXPRESS
+  MONGODB
+</code></pre>
+</li>
+</ol>
+<h3 id="exercises-level-3">Exercises: Level 3</h3>
+<ol>
+<li>Copy countries array(Avoid mutation)</li>
+<li>Arrays are mutable. Create a copy of array which does not modify the original. Sort the copied array and store in a variable sortedCountries</li>
+<li>Sort the webTechs array and mernStack array</li>
+<li>Extract all the countries contain the word &#39;land&#39; from the <a href="https://github.com/Asabeneh/30DaysOfJavaScript/tree/master/data/countries.js">countries array</a> and print it as array</li>
+<li>Find the country containing the hightest number of characters in the <a href="https://github.com/Asabeneh/30DaysOfJavaScript/tree/master/data/countries.js">countries array</a></li>
+<li>Extract all the countries contain the word &#39;land&#39; from the <a href="https://github.com/Asabeneh/30DaysOfJavaScript/tree/master/data/countries.js">countries array</a> and print it as array</li>
+<li>Extract all the countries containing only four characters from the <a href="https://github.com/Asabeneh/30DaysOfJavaScript/tree/master/data/countries.js">countries array</a> and print it as array</li>
+<li>Extract all the countries containing two or more words from the <a href="https://github.com/Asabeneh/30DaysOfJavaScript/tree/master/data/countries.js">countries array</a> and print it as array</li>
+<li>Reverse the <a href="https://github.com/Asabeneh/30DaysOfJavaScript/tree/master/data/countries.js">countries array</a> and capitalize each country and stored it as an array</li>
+</ol>
+<p>🎉 CONGRATULATIONS ! 🎉</p>
+<p><a href="../05_Day_Arrays/05_day_arrays.md">&lt;&lt; Day 5</a> | <a href="../07_Day_Functions/07_day_functions.md">Day 7 &gt;&gt;</a></p>

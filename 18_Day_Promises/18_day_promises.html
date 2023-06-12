@@ -1,0 +1,208 @@
+
+<p><a href="../17_Day_Web_storages/17_day_web_storages.html">&lt;&lt; Day 17</a> | <a href="../19_Day_Closures/19_day_closures.html">Day 19&gt;&gt;</a></p>
+<p><img src="../images/banners/day_1_18.png" alt="Thirty Days Of JavaScript"></p>
+<ul>
+<li><a href="#day-18">Day 18</a><ul>
+<li><a href="#promise">Promise</a></li>
+<li><a href="#callbacks">Callbacks</a><ul>
+<li><a href="#promise-constructor">Promise constructor</a></li>
+</ul>
+</li>
+<li><a href="#fetch-api">Fetch API</a></li>
+<li><a href="#async-and-await">Async and Await</a></li>
+<li><a href="#exercises">Exercises</a><ul>
+<li><a href="#exercises-level-1">Exercises: Level 1</a></li>
+<li><a href="#exercises-level-2">Exercises: Level 2</a></li>
+<li><a href="#exercises-level-3">Exercises: Level 3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="day-18">Day 18</h1>
+<h2 id="promise">Promise</h2>
+<p>We human give or receive a promise to do some activity at some point in time. If we keep the promise we make others happy but if we do not keep the promise, it may lead discontentment. Promise in JavaScript has something in common with the above examples.</p>
+<p>A Promise is a way to handle asynchronous operations in JavaScript. It allows handlers with an asynchronous action&#39;s eventual success value or failure reason. This lets asynchronous methods return values like synchronous methods: instead of immediately returning the final value, the asynchronous method returns a promise to supply the value at some point in the future.</p>
+<p>A Promise is in one of these states:</p>
+<ul>
+<li>pending: initial state, neither fulfilled nor rejected.</li>
+<li>fulfilled: meaning that the operation completed successfully.</li>
+<li>rejected: meaning that the operation failed.</li>
+</ul>
+<p>A pending promise can either be fulfilled with a value, or rejected with a reason (error). When either of these options happens, the associated handlers queued up by a promise&#39;s then method are called. (If the promise has already been fulfilled or rejected when a corresponding handler is attached, the handler will be called, so there is no race condition between an asynchronous operation completing and its handlers being attached.)</p>
+<p>As the Promise.prototype.then() and Promise.prototype.catch() methods return promises, they can be chained.</p>
+<h2 id="callbacks">Callbacks</h2>
+<p>To understand promise very well let us understand callback first. Let&#39;s see the following callbacks. From the following code blocks you will notice, the difference between callback and promises.</p>
+<ul>
+<li>call back
+Let us see a callback function which can take two parameters. The first parameter is err and the second is result. If the err parameter is false, there will not be error other wise it will return an error.</li>
+</ul>
+<p>In this case the err has a value and it will return the err block.</p>
+<pre><code class="language-js">//Callback
+const doSomething = callback =&gt; {
+  setTimeout(() =&gt; {
+    const skills = [&#39;HTML&#39;, &#39;CSS&#39;, &#39;JS&#39;]
+    callback(&#39;It did not go well&#39;, skills)
+  }, 2000)
+}
+
+const callback = (err, result) =&gt; {
+  if (err) {
+    return console.log(err)
+  }
+  return console.log(result)
+}
+
+doSomething(callback)
+</code></pre>
+<pre><code class="language-sh">// after 2 seconds it will print
+It did not go well
+</code></pre>
+<p>In this case the err is false and it will return the else block which is the result.</p>
+<pre><code class="language-js">const doSomething = callback =&gt; {
+  setTimeout(() =&gt; {
+    const skills = [&#39;HTML&#39;, &#39;CSS&#39;, &#39;JS&#39;]
+    callback(false, skills)
+  }, 2000)
+}
+
+doSomething((err, result) =&gt; {
+  if (err) {
+    return console.log(err)
+  }
+  return console.log(result)
+})
+</code></pre>
+<pre><code class="language-sh">// after 2 seconds it will print the skills
+[&quot;HTML&quot;, &quot;CSS&quot;, &quot;JS&quot;]
+</code></pre>
+<h3 id="promise-constructor">Promise constructor</h3>
+<p>We can create a promise using the Promise constructor. We can create a new promise using the key word <code>new</code> followed by the word <code>Promise</code> and followed by a parenthesis. Inside the parenthesis, it takes a <code>callback</code> function. The promise callback function has two parameters which are the <em><code>resolve</code></em> and <em><code>reject</code></em> functions.</p>
+<pre><code class="language-js">// syntax
+const promise = new Promise((resolve, reject) =&gt; {
+  resolve(&#39;success&#39;)
+  reject(&#39;failure&#39;)
+})
+</code></pre>
+<pre><code class="language-js">// Promise
+const doPromise = new Promise((resolve, reject) =&gt; {
+  setTimeout(() =&gt; {
+    const skills = [&#39;HTML&#39;, &#39;CSS&#39;, &#39;JS&#39;]
+    if (skills.length &gt; 0) {
+      resolve(skills)
+    } else {
+      reject(&#39;Something wrong has happened&#39;)
+    }
+  }, 2000)
+})
+
+doPromise
+  .then(result =&gt; {
+    console.log(result)
+  })
+  .catch(error =&gt; console.log(error))
+</code></pre>
+<pre><code class="language-sh">[&quot;HTML&quot;, &quot;CSS&quot;, &quot;JS&quot;]
+</code></pre>
+<p>The above promise has been settled with resolve.
+Let us another example when the promise is settled with reject.</p>
+<pre><code class="language-js">// Promise
+const doPromise = new Promise((resolve, reject) =&gt; {
+  setTimeout(() =&gt; {
+    const skills = [&#39;HTML&#39;, &#39;CSS&#39;, &#39;JS&#39;]
+    if (skills.includes(&#39;Node&#39;)) {
+      resolve(&#39;fullstack developer&#39;)
+    } else {
+      reject(&#39;Something wrong has happened&#39;)
+    }
+  }, 2000)
+})
+
+doPromise
+  .then(result =&gt; {
+    console.log(result)
+  })
+  .catch(error =&gt; console.error(error))
+</code></pre>
+<pre><code class="language-sh">Something wrong has happened
+</code></pre>
+<h2 id="fetch-api">Fetch API</h2>
+<p>The Fetch API provides an interface for fetching resources (including across the network). It will seem familiar to anyone who has used XMLHttpRequest, but the new API provides a more powerful and flexible feature set. In this challenge we will use fetch to request url and APIS. In addition to that let us see demonstrate use case of promises in accessing network resources using the fetch API.</p>
+<pre><code class="language-js">const url = &#39;https://restcountries.com/v2/all&#39; // countries api
+fetch(url)
+  .then(response =&gt; response.json()) // accessing the API data as JSON
+  .then(data =&gt; {
+    // getting the data
+    console.log(data)
+  })
+  .catch(error =&gt; console.error(error)) // handling error if something wrong happens
+</code></pre>
+<h2 id="async-and-await">Async and Await</h2>
+<p>Async and await is an elegant way to handle promises. It is easy to understand and it clean to write.</p>
+<pre><code class="language-js">const square = async function (n) {
+  return n * n
+}
+
+square(2)
+</code></pre>
+<pre><code class="language-sh">Promise {&lt;resolved&gt;: 4}
+</code></pre>
+<p>The word <em>async</em> in front of a function means that function will return a promise. The above square function instead of a value it returns a promise.</p>
+<p>How do we access the value from the promise? To access the value from the promise, we will use the keyword <em>await</em>.</p>
+<pre><code class="language-js">const square = async function (n) {
+  return n * n
+}
+const value = await square(2)
+console.log(value)
+</code></pre>
+<pre><code class="language-sh">4
+</code></pre>
+<p>Now, as you can see from the above example writing async in front of a function create a promise and to get the value from a promise we use await. Async and await go together, one can not exist without the other.</p>
+<p>Let us fetch API data using both promise method and async and await method.</p>
+<ul>
+<li>promise</li>
+</ul>
+<pre><code class="language-js">const url = &#39;https://restcountries.com/v2/all&#39;
+fetch(url)
+  .then(response =&gt; response.json())
+  .then(data =&gt; {
+    console.log(data)
+  })
+  .catch(error =&gt; console.error(error))
+</code></pre>
+<ul>
+<li>async and await</li>
+</ul>
+<pre><code class="language-js">const fetchData = async () =&gt; {
+  try {
+    const response = await fetch(url)
+    const countries = await response.json()
+    console.log(countries)
+  } catch (err) {
+    console.error(err)
+  }
+}
+console.log(&#39;===== async and await&#39;)
+fetchData()
+</code></pre>
+<p>🌕 You are real and you kept your promise and you reached to day 18. Keep your promise and settle the challenge with resolve. You are 18 steps ahead to your way to greatness. Now do some exercises for your brain and  muscles.</p>
+<h2 id="exercises">Exercises</h2>
+<pre><code class="language-js">const countriesAPI = &#39;https://restcountries.com/v2/all&#39;
+const catsAPI = &#39;https://api.thecatapi.com/v1/breeds&#39;
+</code></pre>
+<h3 id="exercises-level-1">Exercises: Level 1</h3>
+<ol>
+<li>Read the countries API using fetch and print the name of country, capital, languages, population and area.</li>
+</ol>
+<h3 id="exercises-level-2">Exercises: Level 2</h3>
+<ol>
+<li>Print out all the cat names in to catNames variable.</li>
+</ol>
+<h3 id="exercises-level-3">Exercises: Level 3</h3>
+<ol>
+<li>Read the cats api and find the average weight of cat in metric unit.</li>
+<li>Read the countries api and find out the 10 largest countries</li>
+<li>Read the countries api and count total number of languages in the world used as officials.</li>
+</ol>
+<p>🎉 CONGRATULATIONS ! 🎉</p>
+<p><a href="../17_Day_Web_storages/17_day_web_storages.html">&lt;&lt; Day 17</a> | <a href="../19_Day_Closures/19_day_closures.html">Day 19&gt;&gt;</a></p>

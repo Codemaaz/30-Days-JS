@@ -1,0 +1,553 @@
+
+
+<p><a href="../10_Day_Sets_and_Maps/10_day_Sets_and_Maps.html">&lt;&lt; Day 10</a> | <a href="../12_Day_Regular_expressions/12_day_regular_expressions.html">Day 12&gt;&gt;</a></p>
+<p><img src="../images/banners/day_1_11.png" alt="Day 11"></p>
+<ul>
+<li><a href="#day-11">Day 11</a><ul>
+<li><a href="#destructuring-and-spread">Destructuring and Spread</a><ul>
+<li><a href="#destructing-arrays">Destructing Arrays</a></li>
+<li><a href="#destructuring-during-iteration">Destructuring during iteration</a></li>
+<li><a href="#destructuring-object">Destructuring Object</a></li>
+<li><a href="#renaming-during-structuring">Renaming during structuring</a></li>
+<li><a href="#object-parameter-without-destructuring">Object parameter without destructuring</a></li>
+<li><a href="#object-parameter-with-destructuring">Object parameter with destructuring</a></li>
+<li><a href="#destructuring-object-during-iteration">Destructuring object during iteration</a></li>
+<li><a href="#spread-or-rest-operator">Spread or Rest Operator</a></li>
+<li><a href="#spread-operator-to-get-the-rest-of-array-elements">Spread operator to get the rest of array elements</a></li>
+<li><a href="#spread-operator-to-copy-array">Spread operator to copy array</a></li>
+<li><a href="#spread-operator-to-copy-object">Spread operator to copy object</a><ul>
+<li><a href="#spread-operator-with-arrow-function">Spread operator with arrow function</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#exercises">Exercises</a><ul>
+<li><a href="#exercises-level-1">Exercises: Level 1</a></li>
+<li><a href="#exercises-level-2">Exercises: Level 2</a></li>
+<li><a href="#exercises-level-3">Exercises: Level 3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="day-11">Day 11</h1>
+<h2 id="destructuring-and-spread">Destructuring and Spread</h2>
+<p>Destructuring is a way to unpack arrays, and objects and assigning to a distinct variable.</p>
+<h3 id="destructing-arrays">Destructing Arrays</h3>
+<pre><code class="language-js">  const numbers = [1, 2, 3]
+  let [numOne, numTwo, numThree] = numbers
+
+  console.log(numOne, numTwo, numThree)
+</code></pre>
+<pre><code class="language-sh">  1 2 3
+</code></pre>
+<pre><code class="language-js">  const names = [&#39;Asabeneh&#39;, &#39;Brook&#39;, &#39;David&#39;, &#39;John&#39;]
+  let [firstPerson, secondPerson, thirdPerson, fourthPerson] = names
+
+  console.log(firstPerson, secondPerson,thirdPerson, fourthPerson)
+</code></pre>
+<pre><code class="language-sh">Asabeneh Brook David John
+</code></pre>
+<pre><code class="language-js">  const scientificConstants = [2.72, 3.14, 9.81, 37, 100]
+  let [e, pi, gravity, bodyTemp, boilingTemp] = scientificConstants
+
+  console.log(e,pi,gravity, bodyTemp, boilingTemp)
+</code></pre>
+<pre><code class="language-sh">2.72 3.14 9.81 37 100
+</code></pre>
+<pre><code class="language-js">const fullStack = [
+  [&#39;HTML&#39;, &#39;CSS&#39;, &#39;JS&#39;, &#39;React&#39;],
+  [&#39;Node&#39;, &#39;Express&#39;, &#39;MongoDB&#39;]
+]
+const [frontEnd, backEnd] = fullStack
+
+console.log(frontEnd)
+console.log(backEnd)
+</code></pre>
+<pre><code class="language-sh">[&quot;HTML&quot;, &quot;CSS&quot;, &quot;JS&quot;, &quot;React&quot;]
+[&quot;Node&quot;, &quot;Express&quot;, &quot;MongoDB&quot;]
+</code></pre>
+<p>If we like to skip on of the values in the array we use additional comma. The comma helps to omit the value at that specific index</p>
+<pre><code class="language-js">  const numbers = [1, 2, 3]
+  let [numOne, , numThree] = numbers //2 is omitted
+
+  console.log(numOne, numThree)
+</code></pre>
+<pre><code class="language-sh">1 3
+</code></pre>
+<pre><code class="language-js">  const names = [&#39;Asabeneh&#39;, &#39;Brook&#39;, &#39;David&#39;, &#39;John&#39;]
+  let [, secondPerson, , fourthPerson] = names // first and third person is omitted
+
+  console.log(secondPerson, fourthPerson)
+</code></pre>
+<pre><code class="language-sh">Brook John
+</code></pre>
+<p>We can use default value in case the value of array for that index is undefined:</p>
+<pre><code class="language-js">const names = [undefined, &#39;Brook&#39;, &#39;David&#39;]
+let [
+  firstPerson = &#39;Asabeneh&#39;,
+  secondPerson,
+  thirdPerson,
+  fourthPerson = &#39;John&#39;
+] = names
+
+console.log(firstPerson, secondPerson, thirdPerson, fourthPerson)  
+</code></pre>
+<pre><code class="language-sh">Asabeneh Brook David John
+</code></pre>
+<p>We can not assign variable to all the elements in the array. We can destructure few of the first and we can get the remaining as array using spread operator(...).</p>
+<pre><code class="language-js">const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+let [num1, num2, num3, ...rest] = nums
+
+console.log(num1, num2, num3)
+console.log(rest)
+</code></pre>
+<pre><code class="language-sh">1 2 3
+[4, 5, 6, 7, 8, 9, 10]
+</code></pre>
+<h3 id="destructuring-during-iteration">Destructuring during iteration</h3>
+<pre><code class="language-js">const countries = [[&#39;Finland&#39;, &#39;Helsinki&#39;], [&#39;Sweden&#39;, &#39;Stockholm&#39;], [&#39;Norway&#39;, &#39;Oslo&#39;]]
+
+for (const [country, city] of countries) {
+console.log(country, city)
+}
+</code></pre>
+<pre><code class="language-sh">Finland Helsinki
+Sweden Stockholm
+Norway Oslo
+</code></pre>
+<pre><code class="language-js">const fullStack = [
+  [&#39;HTML&#39;, &#39;CSS&#39;, &#39;JS&#39;, &#39;React&#39;],
+  [&#39;Node&#39;, &#39;Express&#39;, &#39;MongoDB&#39;]
+]
+
+for(const [first, second, third] of fullStack) {
+console.log(first, second, third)
+}
+</code></pre>
+<pre><code class="language-sh">HTML CSS JS
+Node Express MongoDB
+</code></pre>
+<h3 id="destructuring-object">Destructuring Object</h3>
+<p>When we destructure the name of the variable we use to destructure should be exactly the same as the key or property of the object. See the example below.</p>
+<pre><code class="language-js">const rectangle = {
+  width: 20,
+  height: 10,
+  area: 200
+}
+let { width, height, area, perimeter } = rectangle
+
+console.log(width, height, area, perimeter)
+</code></pre>
+<pre><code class="language-sh">20 10 200 undefined
+</code></pre>
+<h3 id="renaming-during-structuring">Renaming during structuring</h3>
+<pre><code class="language-js">const rectangle = {
+  width: 20,
+  height: 10,
+  area: 200
+}
+let { width: w, height: h, area: a, perimeter: p } = rectangle
+
+console.log(w, h, a, p)
+</code></pre>
+<pre><code class="language-sh">20 10 200 undefined
+</code></pre>
+<p>If the key is not found in the object the variable will be assigned to undefined. Sometimes the key might not be in the object, in that case we can give a default value during declaration. See the example.</p>
+<pre><code class="language-js">const rectangle = {
+  width: 20,
+  height: 10,
+  area: 200
+}
+let { width, height, area, perimeter = 60 } = rectangle
+
+console.log(width, height, area, perimeter) //20 10 200 60
+//Let us modify the object:width to 30 and perimeter to 80
+</code></pre>
+<pre><code class="language-js">const rectangle = {
+  width: 30,
+  height: 10,
+  area: 200,
+  perimeter: 80
+}
+let { width, height, area, perimeter = 60 } = rectangle
+console.log(width, height, area, perimeter) //30 10 200 80
+</code></pre>
+<p>Destructuring keys as a function parameters. Let us create a function which takes a rectangle object and it returns a perimeter of a rectangle.</p>
+<h3 id="object-parameter-without-destructuring">Object parameter without destructuring</h3>
+<pre><code class="language-js">// Without destructuring
+const rect = {
+  width: 20,
+  height: 10
+}
+const calculatePerimeter = rectangle =&gt; {
+  return 2 * (rectangle.width + rectangle.height)
+}
+
+console.log(calculatePerimeter(rect)) // 60
+//with destructuring
+</code></pre>
+<pre><code class="language-js">//Another Example
+const person = {
+  firstName: &#39;Asabeneh&#39;,
+  lastName: &#39;Yetayeh&#39;,
+  age: 250,
+  country: &#39;Finland&#39;,
+  job: &#39;Instructor and Developer&#39;,
+  skills: [
+    &#39;HTML&#39;,
+    &#39;CSS&#39;,
+    &#39;JavaScript&#39;,
+    &#39;React&#39;,
+    &#39;Redux&#39;,
+    &#39;Node&#39;,
+    &#39;MongoDB&#39;,
+    &#39;Python&#39;,
+    &#39;D3.js&#39;
+  ],
+  languages: [&#39;Amharic&#39;, &#39;English&#39;, &#39;Suomi(Finnish)&#39;]
+}
+// Let us create a function which give information about the person object without destructuring
+
+const getPersonInfo = obj =&gt; {
+  const skills = obj.skills
+  const formattedSkills = skills.slice(0, -1).join(&#39;, &#39;)
+  const languages = obj.languages
+  const formattedLanguages = languages.slice(0, -1).join(&#39;, &#39;)
+
+  personInfo = `${obj.firstName} ${obj.lastName} lives in ${obj.country}. He is  ${
+    obj.age
+  } years old. He is an ${obj.job}. He teaches ${formattedSkills} and ${
+    skills[skills.length - 1]
+  }. He speaks ${formattedLanguages} and a little bit of ${languages[2]}.`
+
+  return personInfo
+}
+
+console.log(getPersonInfo(person))
+</code></pre>
+<h3 id="object-parameter-with-destructuring">Object parameter with destructuring</h3>
+<pre><code class="language-js">
+const calculatePerimeter = ({ width, height }) =&gt; {
+  return 2 * (width + height)
+}
+
+console.log(calculatePerimeter(rect)) // 60
+</code></pre>
+<pre><code class="language-js">// Let us create a function which give information about the person object with destructuring
+const getPersonInfo = ({
+  firstName,
+  lastName,
+  age,
+  country,
+  job,
+  skills,
+  languages
+}) =&gt; {
+  const formattedSkills = skills.slice(0, -1).join(&#39;, &#39;)
+  const formattedLanguages = languages.slice(0, -1).join(&#39;, &#39;)
+
+  personInfo = `${firstName} ${lastName} lives in ${country}. He is ${age} years old. He is an ${job}. He teaches ${formattedSkills} and ${
+    skills[skills.length - 1]
+  }. He speaks ${formattedLanguages} and a little bit of ${languages[2]}.`
+
+  return personInfo
+}
+console.log(getPersonInfo(person))
+/*
+Asabeneh Yetayeh lives in Finland. He is  250 years old. He is an Instructor and Developer. He teaches HTML, CSS, JavaScript, React, Redux, Node, MongoDB, Python and D3.js. He speaks Amharic, English and a little bit of Suomi(Finnish)
+*/
+</code></pre>
+<h3 id="destructuring-object-during-iteration">Destructuring object during iteration</h3>
+<pre><code class="language-js">const todoList = [
+{
+  task:&#39;Prepare JS Test&#39;,
+  time:&#39;4/1/2020 8:30&#39;,
+  completed:true
+},
+{
+  task:&#39;Give JS Test&#39;,
+  time:&#39;4/1/2020 10:00&#39;,
+  completed:false
+},
+{
+  task:&#39;Assess Test Result&#39;,
+  time:&#39;4/1/2020 1:00&#39;,
+  completed:false
+}
+]
+
+for (const {task, time, completed} of todoList){
+  console.log(task, time, completed)
+}
+</code></pre>
+<pre><code class="language-sh">Prepare JS Test 4/1/2020 8:30 true
+Give JS Test 4/1/2020 10:00 false
+Assess Test Result 4/1/2020 1:00 false
+</code></pre>
+<h3 id="spread-or-rest-operator">Spread or Rest Operator</h3>
+<p>When we destructure an array we use the spread operator(...) to get the rest elements as array. In addition to that we use spread operator to spread array elements to another array.</p>
+<h3 id="spread-operator-to-get-the-rest-of-array-elements">Spread operator to get the rest of array elements</h3>
+<pre><code class="language-js">const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+let [num1, num2, num3, ...rest] = nums
+​
+console.log(num1, num2, num3)
+console.log(rest)
+</code></pre>
+<pre><code class="language-sh">1 2 3
+[4, 5, 6, 7, 8, 9, 10]
+</code></pre>
+<pre><code class="language-js">const countries = [
+  &#39;Germany&#39;,
+  &#39;France&#39;,
+  &#39;Belgium&#39;,
+  &#39;Finland&#39;,
+  &#39;Sweden&#39;,
+  &#39;Norway&#39;,
+  &#39;Denmark&#39;,
+  &#39;Iceland&#39;
+]
+
+let [gem, fra, , ...nordicCountries] = countries
+
+console.log(gem)
+console.log(fra)
+console.log(nordicCountries)
+</code></pre>
+<pre><code class="language-sh">Germany
+France
+[&quot;Finland&quot;, &quot;Sweden&quot;, &quot;Norway&quot;, &quot;Denmark&quot;, &quot;Iceland&quot;]
+</code></pre>
+<h3 id="spread-operator-to-copy-array">Spread operator to copy array</h3>
+<pre><code class="language-js">const evens = [0, 2, 4, 6, 8, 10]
+const evenNumbers = [...evens]
+
+const odds = [1, 3, 5, 7, 9]
+const oddNumbers = [...odds]
+
+const wholeNumbers = [...evens, ...odds]
+
+console.log(evenNumbers)
+console.log(oddNumbers)
+console.log(wholeNumbers)
+
+</code></pre>
+<pre><code class="language-sh">[0, 2, 4, 6, 8, 10]
+[1, 3, 5, 7, 9]
+[0, 2, 4, 6, 8, 10, 1, 3, 5, 7, 9]
+</code></pre>
+<pre><code class="language-js">const frontEnd = [&#39;HTML&#39;, &#39;CSS&#39;, &#39;JS&#39;, &#39;React&#39;]
+const backEnd = [&#39;Node&#39;, &#39;Express&#39;, &#39;MongoDB&#39;]
+const fullStack = [...frontEnd, ...backEnd]
+
+console.log(fullStack)
+</code></pre>
+<pre><code class="language-sh">[&quot;HTML&quot;, &quot;CSS&quot;, &quot;JS&quot;, &quot;React&quot;, &quot;Node&quot;, &quot;Express&quot;, &quot;MongoDB&quot;]
+</code></pre>
+<h3 id="spread-operator-to-copy-object">Spread operator to copy object</h3>
+<p>We can copy an object using a spread operator</p>
+<pre><code class="language-js">const user = {
+  name:&#39;Asabeneh&#39;,
+  title:&#39;Programmer&#39;,
+  country:&#39;Finland&#39;,
+  city:&#39;Helsinki&#39;
+}
+
+const copiedUser = {...user}
+console.log(copiedUser)
+</code></pre>
+<pre><code class="language-sh">{name: &quot;Asabeneh&quot;, title: &quot;Programmer&quot;, country: &quot;Finland&quot;, city: &quot;Helsinki&quot;}
+</code></pre>
+<p>Modifying or changing the object while copying</p>
+<pre><code class="language-js">const user = {
+  name:&#39;Asabeneh&#39;,
+  title:&#39;Programmer&#39;,
+  country:&#39;Finland&#39;,
+  city:&#39;Helsinki&#39;
+}
+
+const copiedUser = {...user, title:&#39;instructor&#39;}
+console.log(copiedUser)
+</code></pre>
+<pre><code class="language-sh">{name: &quot;Asabeneh&quot;, title: &quot;instructor&quot;, country: &quot;Finland&quot;, city: &quot;Helsinki&quot;}
+</code></pre>
+<h4 id="spread-operator-with-arrow-function">Spread operator with arrow function</h4>
+<p>Whenever we like to write an arrow function which takes unlimited number of arguments we use a spread operator. If we use a spread operator as a parameter, the argument passed when we invoke a function will change to an array.</p>
+<pre><code class="language-js">
+const sumAllNums = (...args) =&gt; {
+  console.log(args)
+}
+
+sumAllNums(1, 2, 3, 4, 5)
+</code></pre>
+<pre><code class="language-sh">[1, 2, 3, 4, 5]
+</code></pre>
+<pre><code class="language-js">
+const sumAllNums = (...args) =&gt; {
+  let sum = 0
+  for (const num of args){
+    sum += num
+  }
+  return sum
+  
+}
+
+console.log(sumAllNums(1, 2, 3, 4, 5))
+</code></pre>
+<pre><code class="language-sh">15
+</code></pre>
+<p>🌕 You achieved quite a lot so far. Now, your level of JavaScript is upper intermediate. Keep going! You have just completed day 11 challenges and you are 11 steps a head in to your way to greatness. Now do some exercises for your brain and for your muscle.</p>
+<h2 id="exercises">Exercises</h2>
+<h3 id="exercises-level-1">Exercises: Level 1</h3>
+<pre><code class="language-js">const constants = [2.72, 3.14, 9.81, 37, 100]
+const countries = [&#39;Finland&#39;, &#39;Estonia&#39;, &#39;Sweden&#39;, &#39;Denmark&#39;, &#39;Norway&#39;]
+const rectangle = {
+  width: 20,
+  height: 10,
+  area: 200,
+  perimeter: 60
+}
+const users = [
+{
+  name:&#39;Brook&#39;,
+  scores:75,
+  skills:[&#39;HTM&#39;, &#39;CSS&#39;, &#39;JS&#39;],
+  age:16
+},
+{
+  name:&#39;Alex&#39;,
+  scores:80,
+  skills:[&#39;HTM&#39;, &#39;CSS&#39;, &#39;JS&#39;],
+  age:18
+},
+{
+  name:&#39;David&#39;,
+  scores:75,
+  skills:[&#39;HTM&#39;, &#39;CSS&#39;],
+  age:22
+},
+{
+  name:&#39;John&#39;,
+  scores:85,
+  skills:[&#39;HTML&#39;],
+  age:25
+},
+{
+  name:&#39;Sara&#39;,
+  scores:95,
+  skills:[&#39;HTM&#39;, &#39;CSS&#39;, &#39;JS&#39;],
+  age: 26
+},
+{
+  name:&#39;Martha&#39;,
+  scores:80,
+  skills:[&#39;HTM&#39;, &#39;CSS&#39;, &#39;JS&#39;],
+  age:18
+},
+{
+  name:&#39;Thomas&#39;,
+  scores:90,
+  skills:[&#39;HTM&#39;, &#39;CSS&#39;, &#39;JS&#39;],
+  age:20
+}
+]
+</code></pre>
+<ol>
+<li>Destructure and assign the elements of constants array to e, pi, gravity, humanBodyTemp, waterBoilingTemp.</li>
+<li>Destructure and assign the elements of countries array to fin, est, sw, den, nor</li>
+<li>Destructure the rectangle object by its properties or keys.</li>
+</ol>
+<h3 id="exercises-level-2">Exercises: Level 2</h3>
+<ol>
+<li>Iterate through the users array and get all the keys of the object using destructuring</li>
+<li>Find the persons who have less than two skills</li>
+</ol>
+<h3 id="exercises-level-3">Exercises: Level 3</h3>
+<ol>
+<li>Destructure the countries object print name, capital, population and languages of all countries</li>
+<li>A junior developer structure student name, skills and score in array of arrays which may not easy to read. Destructure the following array name to name, skills array to skills, scores array to scores, JavaScript score to jsScore and React score to reactScore variable in one line.</li>
+</ol>
+<pre><code class="language-js">  const student = [&#39;David&#39;, [&#39;HTM&#39;, &#39;CSS&#39;, &#39;JS&#39;, &#39;React&#39;], [98, 85, 90, 95]]
+  console.log(name, skills, jsScore, reactScore)
+</code></pre>
+<pre><code class="language-sh">David (4) [&quot;HTM&quot;, &quot;CSS&quot;, &quot;JS&quot;, &quot;React&quot;] 90 95
+</code></pre>
+<ol start="3">
+<li>Write a function called <em>convertArrayToObject</em> which can convert the array to a structure object.</li>
+</ol>
+<pre><code class="language-js">    const students = [
+        [&#39;David&#39;, [&#39;HTM&#39;, &#39;CSS&#39;, &#39;JS&#39;, &#39;React&#39;], [98, 85, 90, 95]],
+        [&#39;John&#39;, [&#39;HTM&#39;, &#39;CSS&#39;, &#39;JS&#39;, &#39;React&#39;], [85, 80, 85, 80]]
+      ]
+
+    console.log(convertArrayToObject(students))
+    [
+      {
+        name: &#39;David&#39;,
+        skills: [&#39;HTM&#39;,&#39;CSS&#39;,&#39;JS&#39;,&#39;React&#39;],
+        scores: [98,85,90,95]
+      },
+      {
+        name: &#39;John&#39;,
+        skills: [&#39;HTM&#39;,&#39;CSS&#39;,&#39;JS&#39;,&#39;React&#39;],
+        scores: [85, 80,85,80]
+      }
+    ]
+</code></pre>
+<ol start="4">
+<li>Copy the student object to newStudent without mutating the original object. In the new object add the following ?</li>
+</ol>
+<ul>
+<li>Add Bootstrap with level 8 to the front end skill sets</li>
+<li>Add Express with level 9 to the back end skill sets</li>
+<li>Add SQL with level 8 to the data base skill sets</li>
+<li>Add SQL without level to the data science skill sets</li>
+</ul>
+<pre><code class="language-js">    const student = {
+      name: &#39;David&#39;,
+      age: 25,
+      skills: {
+        frontEnd: [
+          { skill: &#39;HTML&#39;, level: 10 },
+          { skill: &#39;CSS&#39;, level: 8 },
+          { skill: &#39;JS&#39;, level: 8 },
+          { skill: &#39;React&#39;, level: 9 }
+        ],
+        backEnd: [
+          { skill: &#39;Node&#39;,level: 7 },
+          { skill: &#39;GraphQL&#39;, level: 8 },
+        ],
+        dataBase:[
+          { skill: &#39;MongoDB&#39;, level: 7.5 },
+        ],
+        dataScience:[&#39;Python&#39;, &#39;R&#39;, &#39;D3.js&#39;]
+      }
+    }
+</code></pre>
+<p> The copied object output should look like this:</p>
+<pre><code class="language-js">    {
+    name: &#39;David&#39;,
+    age: 25,
+    skills: {
+      frontEnd: [
+        {skill: &#39;HTML&#39;,level: 10},
+        {skill: &#39;CSS&#39;,level: 8},
+        {skill: &#39;JS&#39;,level: 8},
+        {skill: &#39;React&#39;,level: 9},
+        {skill: &#39;BootStrap&#39;,level: 8}
+      ],
+      backEnd: [
+        {skill: &#39;Node&#39;,level: 7},
+        {skill: &#39;GraphQL&#39;,level: 8},
+        {skill: &#39;Express&#39;,level: 9}
+      ],
+      dataBase: [
+        { skill: &#39;MongoDB&#39;,level: 7.5},
+        { skill: &#39;SQL&#39;,level: 8}
+      ],
+      dataScience: [&#39;Python&#39;,&#39;R&#39;,&#39;D3.js&#39;,&#39;SQL&#39;]
+    }
+  }
+</code></pre>
+<p>🎉 CONGRATULATIONS ! 🎉</p>
+<p><a href="../10_Day_Sets_and_Maps/10_day_Sets_and_Maps.md">&lt;&lt; Day 10</a> | <a href="../12_Day_Regular_expressions/12_day_regular_expressions.md">Day 12 &gt;&gt;</a></p>

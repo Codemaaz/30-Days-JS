@@ -1,0 +1,548 @@
+
+
+<p><a href="../15_Day_Classes/15_day_classes.html">&lt;&lt; Day 15</a> | <a href="../17_Day_Web_storages/17_day_web_storages.html">Day 17 &gt;&gt;</a></p>
+<p><img src="../images/banners/day_1_16.png" alt="Thirty Days Of JavaScript"></p>
+<ul>
+<li><a href="#day-16">Day 16</a><ul>
+<li><a href="#json">JSON</a><ul>
+<li><a href="#converting-json-to-javascript-object">Converting JSON to JavaScript Object</a><ul>
+<li><a href="#jsonparse">JSON.parse()</a></li>
+</ul>
+</li>
+<li><a href="#using-a-reviver-function-with-jsonparse">Using a reviver function with JSON.parse()</a></li>
+<li><a href="#converting-object-to-json">Converting Object to JSON</a></li>
+<li><a href="#using-a-filter-array-with-jsonstringify">Using a Filter Array with JSON.stringify</a></li>
+</ul>
+</li>
+<li><a href="#exercises">Exercises</a><ul>
+<li><a href="#exercises-level-1">Exercises Level 1</a></li>
+<li><a href="#exercises-level-2">Exercises Level 2</a></li>
+<li><a href="#exercises-level-3">Exercises Level 3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="day-16">Day 16</h1>
+<h2 id="json">JSON</h2>
+<p>JSON stands for JavaScript Object Notation. The JSON syntax is derived from JavaScript object notation syntax, but the JSON format is text or string only. JSON is a light weight data format for storing and transporting. JSON is mostly used when data is sent from a server to a client. JSON is an easier-to-use alternative to XML.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-js">{
+&quot;users&quot;:[
+  {
+    &quot;firstName&quot;:&quot;Asabeneh&quot;,
+    &quot;lastName&quot;:&quot;Yetayeh&quot;,
+    &quot;age&quot;:250,
+    &quot;email&quot;:&quot;asab@asb.com&quot;
+  },
+  {
+    &quot;firstName&quot;:&quot;Alex&quot;,
+    &quot;lastName&quot;:&quot;James&quot;,
+    &quot;age&quot;:25,
+    &quot;email&quot;:&quot;alex@alex.com&quot;
+  },
+  {
+  &quot;firstName&quot;:&quot;Lidiya&quot;,
+  &quot;lastName&quot;:&quot;Tekle&quot;,
+  &quot;age&quot;:28,
+  &quot;email&quot;:&quot;lidiya@lidiya.com&quot;
+  }
+]
+}
+</code></pre>
+<p>The above JSON example is not much different from a normal object. Then, what is the difference ? The difference is the key of a JSON object should be with double quotes or it should be a string. JavaScript Object and JSON are very similar that we can change JSON to Object and Object to JSON.</p>
+<p>Let us see the above example in more detail, it starts with a curly bracket. Inside the curly bracket, there is &quot;users&quot; key which has a value array. Inside the array we have different objects and each objects has keys, each keys has to have double quotes. For instance, we use &quot;firstNaMe&quot; instead of just firstName, however in object we use keys without double quotes. This is the major difference between an object and a JSON. Let&#39;s see more examples about JSON.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-js">{
+    &quot;Alex&quot;: {
+        &quot;email&quot;: &quot;alex@alex.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;
+        ],
+        &quot;age&quot;: 20,
+        &quot;isLoggedIn&quot;: false,
+        &quot;points&quot;: 30
+    },
+    &quot;Asab&quot;: {
+        &quot;email&quot;: &quot;asab@asab.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;,
+            &quot;Redux&quot;,
+            &quot;MongoDB&quot;,
+            &quot;Express&quot;,
+            &quot;React&quot;,
+            &quot;Node&quot;
+        ],
+        &quot;age&quot;: 25,
+        &quot;isLoggedIn&quot;: false,
+        &quot;points&quot;: 50
+    },
+    &quot;Brook&quot;: {
+        &quot;email&quot;: &quot;daniel@daniel.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;,
+            &quot;React&quot;,
+            &quot;Redux&quot;
+        ],
+        &quot;age&quot;: 30,
+        &quot;isLoggedIn&quot;: true,
+        &quot;points&quot;: 50
+    },
+    &quot;Daniel&quot;: {
+        &quot;email&quot;: &quot;daniel@alex.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;,
+            &quot;Python&quot;
+        ],
+        &quot;age&quot;: 20,
+        &quot;isLoggedIn&quot;: false,
+        &quot;points&quot;: 40
+    },
+    &quot;John&quot;: {
+        &quot;email&quot;: &quot;john@john.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;,
+            &quot;React&quot;,
+            &quot;Redux&quot;,
+            &quot;Node.js&quot;
+        ],
+        &quot;age&quot;: 20,
+        &quot;isLoggedIn&quot;: true,
+        &quot;points&quot;: 50
+    },
+    &quot;Thomas&quot;: {
+        &quot;email&quot;: &quot;thomas@thomas.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;,
+            &quot;React&quot;
+        ],
+        &quot;age&quot;: 20,
+        &quot;isLoggedIn&quot;: false,
+        &quot;points&quot;: 40
+    },
+    &quot;Paul&quot;: {
+        &quot;email&quot;: &quot;paul@paul.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;,
+            &quot;MongoDB&quot;,
+            &quot;Express&quot;,
+            &quot;React&quot;,
+            &quot;Node&quot;
+        ],
+        &quot;age&quot;: 20,
+        &quot;isLoggedIn&quot;: false,
+        &quot;points&quot;: 40
+    }
+}
+</code></pre>
+<h3 id="converting-json-to-javascript-object">Converting JSON to JavaScript Object</h3>
+<p>Mostly we fetch JSON data from HTTP response or from a file, but we can store the JSON as a string and we can change to Object for sake of demonstration. In JavaScript the keyword <em>JSON</em> has <em>parse()</em> and <em>stringify()</em> methods. When we want to change the JSON to an object we parse the JSON using <em>JSON.parse()</em>. When we want to change the object to JSON we use <em>JSON.stringify()</em>.</p>
+<h4 id="jsonparse">JSON.parse()</h4>
+<pre><code class="language-js">JSON.parse(json[, reviver])
+// json or text , the data
+// reviver is an optional callback function
+/* JSON.parse(json, (key, value) =&gt; {
+
+})
+*/
+</code></pre>
+<pre><code class="language-js">const usersText = `{
+&quot;users&quot;:[
+  {
+    &quot;firstName&quot;:&quot;Asabeneh&quot;,
+    &quot;lastName&quot;:&quot;Yetayeh&quot;,
+    &quot;age&quot;:250,
+    &quot;email&quot;:&quot;asab@asb.com&quot;
+  },
+  {
+    &quot;firstName&quot;:&quot;Alex&quot;,
+    &quot;lastName&quot;:&quot;James&quot;,
+    &quot;age&quot;:25,
+    &quot;email&quot;:&quot;alex@alex.com&quot;
+  },
+  {
+  &quot;firstName&quot;:&quot;Lidiya&quot;,
+  &quot;lastName&quot;:&quot;Tekle&quot;,
+  &quot;age&quot;:28,
+  &quot;email&quot;:&quot;lidiya@lidiya.com&quot;
+  }
+]
+}`
+
+const usersObj = JSON.parse(usersText, undefined, 4)
+console.log(usersObj)
+</code></pre>
+<h3 id="using-a-reviver-function-with-jsonparse">Using a reviver function with JSON.parse()</h3>
+<p>To use the reviver function as a formatter, we put the keys we want to format first name and last name value. Let us say, we are interested to format the firstName and lastName of the JSON data .</p>
+<pre><code class="language-js">const usersText = `{
+&quot;users&quot;:[
+  {
+    &quot;firstName&quot;:&quot;Asabeneh&quot;,
+    &quot;lastName&quot;:&quot;Yetayeh&quot;,
+    &quot;age&quot;:250,
+    &quot;email&quot;:&quot;asab@asb.com&quot;
+  },
+  {
+    &quot;firstName&quot;:&quot;Alex&quot;,
+    &quot;lastName&quot;:&quot;James&quot;,
+    &quot;age&quot;:25,
+    &quot;email&quot;:&quot;alex@alex.com&quot;
+  },
+  {
+  &quot;firstName&quot;:&quot;Lidiya&quot;,
+  &quot;lastName&quot;:&quot;Tekle&quot;,
+  &quot;age&quot;:28,
+  &quot;email&quot;:&quot;lidiya@lidiya.com&quot;
+  }
+]
+}`
+
+const usersObj = JSON.parse(usersText, (key, value) =&gt; {
+  let newValue =
+    typeof value == &#39;string&#39; &amp;&amp; key != &#39;email&#39; ? value.toUpperCase() : value
+  return newValue
+})
+console.log(usersObj)
+</code></pre>
+<p>The <em>JSON.parse()</em> is very handy to use. You do not have to pass optional parameter, you can just use it with the required parameter and you will achieve quite a lot.</p>
+<h3 id="converting-object-to-json">Converting Object to JSON</h3>
+<p>When we want to change the object to JSON we use <em>JSON.stringify()</em>. The stringify method takes one required parameter and two optional parameters. The replacer is used as filter and the space is an indentations. If we do not want to filter out any of the keys from the object we can just pass undefined.</p>
+<pre><code class="language-js">JSON.stringify(obj, replacer, space)
+// json or text , the data
+// reviver is an optional callback function
+</code></pre>
+<p>Let us convert the following object to a string. First let use keep all the keys and also let us have 4 space indentation.</p>
+<pre><code class="language-js">const users = {
+  Alex: {
+    email: &#39;alex@alex.com&#39;,
+    skills: [&#39;HTML&#39;, &#39;CSS&#39;, &#39;JavaScript&#39;],
+    age: 20,
+    isLoggedIn: false,
+    points: 30
+  },
+  Asab: {
+    email: &#39;asab@asab.com&#39;,
+    skills: [
+      &#39;HTML&#39;,
+      &#39;CSS&#39;,
+      &#39;JavaScript&#39;,
+      &#39;Redux&#39;,
+      &#39;MongoDB&#39;,
+      &#39;Express&#39;,
+      &#39;React&#39;,
+      &#39;Node&#39;
+    ],
+    age: 25,
+    isLoggedIn: false,
+    points: 50
+  },
+  Brook: {
+    email: &#39;daniel@daniel.com&#39;,
+    skills: [&#39;HTML&#39;, &#39;CSS&#39;, &#39;JavaScript&#39;, &#39;React&#39;, &#39;Redux&#39;],
+    age: 30,
+    isLoggedIn: true,
+    points: 50
+  },
+  Daniel: {
+    email: &#39;daniel@alex.com&#39;,
+    skills: [&#39;HTML&#39;, &#39;CSS&#39;, &#39;JavaScript&#39;, &#39;Python&#39;],
+    age: 20,
+    isLoggedIn: false,
+    points: 40
+  },
+  John: {
+    email: &#39;john@john.com&#39;,
+    skills: [&#39;HTML&#39;, &#39;CSS&#39;, &#39;JavaScript&#39;, &#39;React&#39;, &#39;Redux&#39;, &#39;Node.js&#39;],
+    age: 20,
+    isLoggedIn: true,
+    points: 50
+  },
+  Thomas: {
+    email: &#39;thomas@thomas.com&#39;,
+    skills: [&#39;HTML&#39;, &#39;CSS&#39;, &#39;JavaScript&#39;, &#39;React&#39;],
+    age: 20,
+    isLoggedIn: false,
+    points: 40
+  },
+  Paul: {
+    email: &#39;paul@paul.com&#39;,
+    skills: [
+      &#39;HTML&#39;,
+      &#39;CSS&#39;,
+      &#39;JavaScript&#39;,
+      &#39;MongoDB&#39;,
+      &#39;Express&#39;,
+      &#39;React&#39;,
+      &#39;Node&#39;
+    ],
+    age: 20,
+    isLoggedIn: false,
+    points: 40
+  }
+}
+
+const txt = JSON.stringify(users, undefined, 4)
+console.log(txt) // text means JSON- because json is a string form of an object.
+</code></pre>
+<pre><code class="language-sh">{
+    &quot;Alex&quot;: {
+        &quot;email&quot;: &quot;alex@alex.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;
+        ],
+        &quot;age&quot;: 20,
+        &quot;isLoggedIn&quot;: false,
+        &quot;points&quot;: 30
+    },
+    &quot;Asab&quot;: {
+        &quot;email&quot;: &quot;asab@asab.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;,
+            &quot;Redux&quot;,
+            &quot;MongoDB&quot;,
+            &quot;Express&quot;,
+            &quot;React&quot;,
+            &quot;Node&quot;
+        ],
+        &quot;age&quot;: 25,
+        &quot;isLoggedIn&quot;: false,
+        &quot;points&quot;: 50
+    },
+    &quot;Brook&quot;: {
+        &quot;email&quot;: &quot;daniel@daniel.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;,
+            &quot;React&quot;,
+            &quot;Redux&quot;
+        ],
+        &quot;age&quot;: 30,
+        &quot;isLoggedIn&quot;: true,
+        &quot;points&quot;: 50
+    },
+    &quot;Daniel&quot;: {
+        &quot;email&quot;: &quot;daniel@alex.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;,
+            &quot;Python&quot;
+        ],
+        &quot;age&quot;: 20,
+        &quot;isLoggedIn&quot;: false,
+        &quot;points&quot;: 40
+    },
+    &quot;John&quot;: {
+        &quot;email&quot;: &quot;john@john.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;,
+            &quot;React&quot;,
+            &quot;Redux&quot;,
+            &quot;Node.js&quot;
+        ],
+        &quot;age&quot;: 20,
+        &quot;isLoggedIn&quot;: true,
+        &quot;points&quot;: 50
+    },
+    &quot;Thomas&quot;: {
+        &quot;email&quot;: &quot;thomas@thomas.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;,
+            &quot;React&quot;
+        ],
+        &quot;age&quot;: 20,
+        &quot;isLoggedIn&quot;: false,
+        &quot;points&quot;: 40
+    },
+    &quot;Paul&quot;: {
+        &quot;email&quot;: &quot;paul@paul.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;,
+            &quot;MongoDB&quot;,
+            &quot;Express&quot;,
+            &quot;React&quot;,
+            &quot;Node&quot;
+        ],
+        &quot;age&quot;: 20,
+        &quot;isLoggedIn&quot;: false,
+        &quot;points&quot;: 40
+    }
+}
+</code></pre>
+<h3 id="using-a-filter-array-with-jsonstringify">Using a Filter Array with JSON.stringify</h3>
+<p>Now, lets use the replacer as a filter. The user object has long list of keys but we are interested only in few of them. We put the keys we want to keep in array as show in the example and use it the place of the replacer.</p>
+<pre><code class="language-js">const user = {
+  firstName: &#39;Asabeneh&#39;,
+  lastName: &#39;Yetayeh&#39;,
+  country: &#39;Finland&#39;,
+  city: &#39;Helsinki&#39;,
+  email: &#39;alex@alex.com&#39;,
+  skills: [&#39;HTML&#39;, &#39;CSS&#39;, &#39;JavaScript&#39;, &#39;React&#39;, &#39;Python&#39;],
+  age: 250,
+  isLoggedIn: false,
+  points: 30
+}
+
+const txt = JSON.stringify(user,[&#39;firstName&#39;, &#39;lastName&#39;, &#39;country&#39;, &#39;city&#39;, &#39;age&#39;],4)
+console.log(txt)
+</code></pre>
+<pre><code class="language-sh">{
+    &quot;firstName&quot;: &quot;Asabeneh&quot;,
+    &quot;lastName&quot;: &quot;Yetayeh&quot;,
+    &quot;country&quot;: &quot;Finland&quot;,
+    &quot;city&quot;: &quot;Helsinki&quot;,
+    &quot;age&quot;: 250
+}
+</code></pre>
+<p>🌕 You are extraordinary.  Now, you knew a light-weight data format which you may use to store data or to send it an HTTP server. You are 16 steps a head to your way to greatness. Now do some exercises for your brain and for your muscle.</p>
+<h2 id="exercises">Exercises</h2>
+<pre><code class="language-js">const skills = [&#39;HTML&#39;, &#39;CSS&#39;, &#39;JS&#39;, &#39;React&#39;,&#39;Node&#39;, &#39;Python&#39;]
+let age = 250;
+let isMarried = true
+const student = {
+  firstName:&#39;Asabeneh&#39;,
+  lastName:&#39;Yetayehe&#39;,
+  age:250,
+  isMarried:true,
+  skills:[&#39;HTML&#39;, &#39;CSS&#39;, &#39;JS&#39;, &#39;React&#39;,&#39;Node&#39;, &#39;Python&#39;, ]
+}
+const txt = `{
+    &quot;Alex&quot;: {
+        &quot;email&quot;: &quot;alex@alex.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;
+        ],
+        &quot;age&quot;: 20,
+        &quot;isLoggedIn&quot;: false,
+        &quot;points&quot;: 30
+    },
+    &quot;Asab&quot;: {
+        &quot;email&quot;: &quot;asab@asab.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;,
+            &quot;Redux&quot;,
+            &quot;MongoDB&quot;,
+            &quot;Express&quot;,
+            &quot;React&quot;,
+            &quot;Node&quot;
+        ],
+        &quot;age&quot;: 25,
+        &quot;isLoggedIn&quot;: false,
+        &quot;points&quot;: 50
+    },
+    &quot;Brook&quot;: {
+        &quot;email&quot;: &quot;daniel@daniel.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;,
+            &quot;React&quot;,
+            &quot;Redux&quot;
+        ],
+        &quot;age&quot;: 30,
+        &quot;isLoggedIn&quot;: true,
+        &quot;points&quot;: 50
+    },
+    &quot;Daniel&quot;: {
+        &quot;email&quot;: &quot;daniel@alex.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;,
+            &quot;Python&quot;
+        ],
+        &quot;age&quot;: 20,
+        &quot;isLoggedIn&quot;: false,
+        &quot;points&quot;: 40
+    },
+    &quot;John&quot;: {
+        &quot;email&quot;: &quot;john@john.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;,
+            &quot;React&quot;,
+            &quot;Redux&quot;,
+            &quot;Node.js&quot;
+        ],
+        &quot;age&quot;: 20,
+        &quot;isLoggedIn&quot;: true,
+        &quot;points&quot;: 50
+    },
+    &quot;Thomas&quot;: {
+        &quot;email&quot;: &quot;thomas@thomas.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;,
+            &quot;React&quot;
+        ],
+        &quot;age&quot;: 20,
+        &quot;isLoggedIn&quot;: false,
+        &quot;points&quot;: 40
+    },
+    &quot;Paul&quot;: {
+        &quot;email&quot;: &quot;paul@paul.com&quot;,
+        &quot;skills&quot;: [
+            &quot;HTML&quot;,
+            &quot;CSS&quot;,
+            &quot;JavaScript&quot;,
+            &quot;MongoDB&quot;,
+            &quot;Express&quot;,
+            &quot;React&quot;,
+            &quot;Node&quot;
+        ],
+        &quot;age&quot;: 20,
+        &quot;isLoggedIn&quot;: false,
+        &quot;points&quot;: 40
+    }
+}
+`
+</code></pre>
+<h3 id="exercises-level-1">Exercises Level 1</h3>
+<ol>
+<li>Change skills array to JSON using JSON.stringify()</li>
+<li>Stringify the age variable</li>
+<li>Stringify the isMarried variable</li>
+<li>Stringify the student object</li>
+</ol>
+<h3 id="exercises-level-2">Exercises Level 2</h3>
+<ol>
+<li>Stringify the students object with only firstName, lastName and skills properties</li>
+</ol>
+<h3 id="exercises-level-3">Exercises Level 3</h3>
+<ol>
+<li>Parse the <em>txt</em> JSON to object.</li>
+<li>Find the user who has many skills from the variable stored in <em>txt</em>.</li>
+</ol>
+<p>🎉 CONGRATULATIONS ! 🎉</p>
+<p><a href="../15_Day_Classes/15_day_classes.html">&lt;&lt; Day 15</a> | <a href="../17_Day_Web_storages/17_day_web_storages.html">Day 17 &gt;&gt;</a></p>

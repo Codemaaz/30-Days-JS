@@ -1,0 +1,191 @@
+
+  
+  <p><a href="../21_Day_DOM/21_day_dom.html">&lt;&lt; Day 21</a> | <a href="../23_Day_Event_listeners/23_day_event_listeners.html">Day 23 &gt;&gt;</a></p>
+  <p><img src="../images/banners/day_1_22.png" alt="Thirty Days Of JavaScript"></p>
+  <ul>
+  <li><a href="#day-22">Day 22</a><ul>
+  <li><a href="#domdocument-object-model-day-2">DOM(Document Object Model)-Day 2</a><ul>
+  <li><a href="#creating-an-element">Creating an Element</a></li>
+  <li><a href="#creating-elements">Creating elements</a></li>
+  <li><a href="#appending-child-to-a-parent-element">Appending child to a parent element</a></li>
+  <li><a href="#removing-a-child-element-from-a-parent-node">Removing a child element from a parent node</a></li>
+  </ul>
+  </li>
+  <li><a href="#exercises">Exercises</a><ul>
+  <li><a href="#exercises-level-1">Exercises: Level 1</a></li>
+  <li><a href="#exercises-level-2">Exercises: Level 2</a></li>
+  <li><a href="#exercises-level-3">Exercises: Level 3</a></li>
+  </ul>
+  </li>
+  </ul>
+  </li>
+  </ul>
+  <h1 id="day-22">Day 22</h1>
+  <h2 id="domdocument-object-model-day-2">DOM(Document Object Model)-Day 2</h2>
+  <h3 id="creating-an-element">Creating an Element</h3>
+  <p>To create an HTML element we use tag name. Creating an HTML element using JavaScript is very simple and straight forward. We use the method <em>document.createElement()</em>. The method takes an HTML element tag name as a string parameter.</p>
+  <pre><code class="language-js">// syntax
+  document.createElement(&#39;tagname&#39;)
+  </code></pre>
+  <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+  &lt;html&gt;
+  
+  &lt;head&gt;
+      &lt;title&gt;Document Object Model:30 Days Of JavaScript&lt;/title&gt;
+  &lt;/head&gt;
+  
+  &lt;body&gt;
+  
+      &lt;script&gt;
+          let title = document.createElement(&#39;h1&#39;)
+          title.className = &#39;title&#39;
+          title.style.fontSize = &#39;24px&#39;
+          title.textContent = &#39;Creating HTML element DOM Day 2&#39;
+  
+          console.log(title)
+      &lt;/script&gt;
+  &lt;/body&gt;
+  
+  &lt;/html&gt;
+  </code></pre>
+  <h3 id="creating-elements">Creating elements</h3>
+  <p>To create multiple elements we should use loop. Using loop we can create as many HTML elements as we want.
+  After we create the element we can assign value to the different properties of the HTML object.</p>
+  <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+  &lt;html&gt;
+  
+  &lt;head&gt;
+      &lt;title&gt;Document Object Model:30 Days Of JavaScript&lt;/title&gt;
+  &lt;/head&gt;
+  
+  &lt;body&gt;
+  
+      &lt;script&gt;
+          let title
+          for (let i = 0; i &lt; 3; i++) {
+              title = document.createElement(&#39;h1&#39;)
+              title.className = &#39;title&#39;
+              title.style.fontSize = &#39;24px&#39;
+              title.textContent = i
+              console.log(title)
+          }
+      &lt;/script&gt;
+  &lt;/body&gt;
+  
+  &lt;/html&gt;
+  </code></pre>
+  <h3 id="appending-child-to-a-parent-element">Appending child to a parent element</h3>
+  <p>To see a created element on the HTML document we should append it to the parent as a child element. We can access the HTML document body using <em>document.body</em>. The <em>document.body</em> support the <em>appendChild()</em> method. See the example below.</p>
+  <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+  &lt;html&gt;
+  
+  &lt;head&gt;
+      &lt;title&gt;Document Object Model:30 Days Of JavaScript&lt;/title&gt;
+  &lt;/head&gt;
+  
+  &lt;body&gt;
+  
+      &lt;script&gt;
+          // creating multiple elements and appending to parent element
+          let title
+          for (let i = 0; i &lt; 3; i++) {
+              title = document.createElement(&#39;h1&#39;)
+              title.className = &#39;title&#39;
+              title.style.fontSize = &#39;24px&#39;
+              title.textContent = i
+              document.body.appendChild(title)
+          }
+      &lt;/script&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+  </code></pre>
+  <h3 id="removing-a-child-element-from-a-parent-node">Removing a child element from a parent node</h3>
+  <p>After creating an HTML, we may want to remove element or elements and we can use the <em>removeChild()</em> method.</p>
+  <p><strong>Example:</strong></p>
+  <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+  &lt;html&gt;
+  
+  &lt;head&gt;
+      &lt;title&gt;Document Object Model:30 Days Of JavaScript&lt;/title&gt;
+  &lt;/head&gt;
+  
+  &lt;body&gt;
+      &lt;h1&gt;Removing child Node&lt;/h1&gt;
+      &lt;h2&gt;Asabeneh Yetayeh challenges in 2020&lt;/h1&gt;
+      &lt;ul&gt;
+          &lt;li&gt;30DaysOfPython Challenge Done&lt;/li&gt;
+          &lt;li&gt;30DaysOfJavaScript Challenge Done&lt;/li&gt;
+          &lt;li&gt;30DaysOfReact Challenge Coming&lt;/li&gt;
+          &lt;li&gt;30DaysOfFullStack Challenge Coming&lt;/li&gt;
+          &lt;li&gt;30DaysOfDataAnalysis Challenge Coming&lt;/li&gt;
+          &lt;li&gt;30DaysOfReactNative Challenge Coming&lt;/li&gt;
+          &lt;li&gt;30DaysOfMachineLearning Challenge Coming&lt;/li&gt;
+      &lt;/ul&gt;
+  
+      &lt;script&gt;
+          const ul = document.querySelector(&#39;ul&#39;)
+          const lists = document.querySelectorAll(&#39;li&#39;)
+          for (const list of lists) {
+              ul.removeChild(list)
+  
+          }
+      &lt;/script&gt;
+  &lt;/body&gt;
+  
+  &lt;/html&gt;
+  </code></pre>
+  <p>As we have see in the previous section there is a better way to eliminate all the inner HTML elements or the children of a parent element using the method <em>innerHTML</em> properties.</p>
+  <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+  &lt;html&gt;
+  
+  &lt;head&gt;
+      &lt;title&gt;Document Object Model:30 Days Of JavaScript&lt;/title&gt;
+  &lt;/head&gt;
+  
+  &lt;body&gt;
+      &lt;h1&gt;Removing child Node&lt;/h1&gt;
+      &lt;h2&gt;Asabeneh Yetayeh challenges in 2020&lt;/h1&gt;
+      &lt;ul&gt;
+          &lt;li&gt;30DaysOfPython Challenge Done&lt;/li&gt;
+          &lt;li&gt;30DaysOfJavaScript Challenge Done&lt;/li&gt;
+          &lt;li&gt;30DaysOfReact Challenge Coming&lt;/li&gt;
+          &lt;li&gt;30DaysOfFullStack Challenge Coming&lt;/li&gt;
+          &lt;li&gt;30DaysOfDataAnalysis Challenge Coming&lt;/li&gt;
+          &lt;li&gt;30DaysOfReactNative Challenge Coming&lt;/li&gt;
+          &lt;li&gt;30DaysOfMachineLearning Challenge Coming&lt;/li&gt;
+      &lt;/ul&gt;
+  
+      &lt;script&gt;
+          const ul = document.querySelector(&#39;ul&#39;)
+          ul.innerHTML = &#39;&#39;
+      &lt;/script&gt;
+  &lt;/body&gt;
+  
+  &lt;/html&gt;
+  </code></pre>
+  <p>The above snippet of code cleared all the child elements.</p>
+  <hr>
+  <p>🌕 You are so special, you are progressing everyday. Now, you knew how to destroy a created DOM element when it is needed. You learned DOM and now you have the capability to build and develop applications. You are left with only eight days to your way to greatness. Now do some exercises for your brain and for your muscle.</p>
+  <h2 id="exercises">Exercises</h2>
+  <h3 id="exercises-level-1">Exercises: Level 1</h3>
+  <ol>
+  <li>Create a div container on HTML document and create 100 to 100 numbers dynamically and append to the container div. <ul>
+  <li>Even numbers background is green</li>
+  <li>Odd numbers background is yellow</li>
+  <li>Prime numbers background is red</li>
+  </ul>
+  </li>
+  </ol>
+  <p><img src="./../images/projects/dom_min_project_day_number_generators_2.1.png" alt="Number Generator"></p>
+  <h3 id="exercises-level-2">Exercises: Level 2</h3>
+  <ol>
+  <li>Use the countries array to display all the countries.See the design</li>
+  </ol>
+  <p><img src="./../images/projects/dom_min_project_countries_aray_day_2.2.png" alt="World Countries List"></p>
+  <h3 id="exercises-level-3">Exercises: Level 3</h3>
+  <p>Check the requirement of this project from both images(jpg and gif). All the data and CSS has been implemented using JavaScript only. The data is found on starter folder project_3. The drop down button has been created using <a href="https://www.w3schools.com/tags/tag_details.asp"><em>details</em></a> HTML element.</p>
+  <p><img src="./../images/projects/dom_mini_project_challenge_info_day_2.3.gif" alt="Challenge Information"></p>
+  <p><img src="./../images/projects/dom_mini_project_challenge_info_day_2.3.png" alt="Challenge Information"></p>
+  <p>🎉 CONGRATULATIONS ! 🎉</p>
+  <p><a href="../21_Day_DOM/21_day_dom.html">&lt;&lt; Day 21</a> | <a href="../23_Day_Event_listeners/23_day_event_listeners.html">Day 23 &gt;&gt;</a></p>
+  

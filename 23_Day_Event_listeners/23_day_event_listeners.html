@@ -1,0 +1,276 @@
+
+<p><a href="../22_Day_Manipulating_DOM_object/22_day_manipulating_DOM_object.html">&lt;&lt; Day 22</a> | <a href="../24_Day_Project_solar_system/24_day_project_solar_system.html">Day 24 &gt;&gt;</a></p>
+<p><img src="../images/banners/day_1_23.png" alt="Thirty Days Of JavaScript"></p>
+<ul>
+<li><a href="#day-22">Day 22</a><ul>
+<li><a href="#domdocument-object-model-day-3">DOM(Document Object Model)-Day 3</a><ul>
+<li><a href="#event-listeners">Event Listeners</a><ul>
+<li><a href="#click">Click</a></li>
+<li><a href="#double-click">Double Click</a></li>
+<li><a href="#mouse-enter">Mouse enter</a></li>
+</ul>
+</li>
+<li><a href="#getting-value-from-an-input-element">Getting value from an input element</a></li>
+<li><a href="#input-value">input value</a><ul>
+<li><a href="#input-event-and-change">input event and change</a></li>
+<li><a href="#blur-event">blur event</a></li>
+<li><a href="#keypress-keydow-and-keyup">keypress, keydow and keyup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#exercises">Exercises</a><ul>
+<li><a href="#exercise-level-1">Exercise: Level 1</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="day-22">Day 22</h1>
+<h2 id="domdocument-object-model-day-3">DOM(Document Object Model)-Day 3</h2>
+<h3 id="event-listeners">Event Listeners</h3>
+<p>Common HTML events:onclick, onchange, onmouseover, onmouseout, onkeydown, onkeyup, onload.
+We can add event listener method to any DOM object. We use <strong><em>addEventListener()</em></strong> method to listen different event types on HTML elements. The <em>addEventListener()</em> method takes two arguments, an event listener and a callback function.</p>
+<pre><code class="language-js">selectedElement.addEventListener(&#39;eventlistner&#39;, function(e) {
+  // the activity you want to occur after the event will be in here
+})
+// or
+
+selectedElement.addEventListener(&#39;eventlistner&#39;, e =&gt; {
+  // the activity you want to occur after the event will be in here
+})
+</code></pre>
+<h4 id="click">Click</h4>
+<p>To attach an event listener to an element, first we select the element then we attach the addEventListener method. The event listener takes event type and callback functions as argument.</p>
+<p>The following is an example of click type event.</p>
+<p><strong>Example: click</strong></p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Document Object Model&lt;/title&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;button&gt;Click Me&lt;/button&gt;
+
+    &lt;script&gt;
+      const button = document.querySelector(&#39;button&#39;)
+      button.addEventListener(&#39;click&#39;, e =&gt; {
+        console.log(&#39;e gives the event listener object:&#39;, e)
+        console.log(&#39;e.target gives the selected element: &#39;, e.target)
+        console.log(
+          &#39;e.target.textContent gives content of selected element: &#39;,
+          e.target.textContent
+        )
+      })
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>An event can be also attached directly to the HTML element as inline script.</p>
+<p><strong>Example: onclick</strong></p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Document Object Model&lt;/title&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;button onclick=&quot;clickMe()&quot;&gt;Click Me&lt;/button&gt;
+    &lt;script&gt;
+      const clickMe = () =&gt; {
+        alert(&#39;We can attach event on HTML element&#39;)
+      }
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h4 id="double-click">Double Click</h4>
+<p>To attach an event listener to an element, first we select the element then we attach the addEventListener method. The event listener takes event type and callback functions as argument.</p>
+<p>The following is an example of click type event.
+<strong>Example: dblclick</strong></p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Document Object Model&lt;/title&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;button&gt;Click Me&lt;/button&gt;
+    &lt;script&gt;
+      const button = document.querySelector(&#39;button&#39;)
+      button.addEventListener(&#39;dblclick&#39;, e =&gt; {
+        console.log(&#39;e gives the event listener object:&#39;, e)
+        console.log(&#39;e.target gives the selected element: &#39;, e.target)
+        console.log(
+          &#39;e.target.textContent gives content of selected element: &#39;,
+          e.target.textContent
+        )
+      })
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h4 id="mouse-enter">Mouse enter</h4>
+<p>To attach an event listener to an element, first we select the element then we attach the addEventListener method. The event listener takes event type and callback functions as argument.</p>
+<p>The following is an example of click type event.</p>
+<p><strong>Example: mouseenter</strong></p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Document Object Model&lt;/title&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;button&gt;Click Me&lt;/button&gt;
+    &lt;script&gt;
+      const button = document.querySelector(&#39;button&#39;)
+      button.addEventListener(&#39;mouseenter&#39;, e =&gt; {
+        console.log(&#39;e gives the event listener object:&#39;, e)
+        console.log(&#39;e.target gives the selected element: &#39;, e.target)
+        console.log(
+          &#39;e.target.textContent gives content of selected element: &#39;,
+          e.target.textContent
+        )
+      })
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>By now you are familiar with addEventListen method and how to attach event listener. There are many types of event listeners. But in this challenge we will focus the most common important events.
+List of events:</p>
+<ul>
+<li>click - when the element clicked</li>
+<li>dblclick - when the element double clicked</li>
+<li>mouseenter - when the mouse point enter to the element</li>
+<li>mouseleave - when the mouse pointer leave the element</li>
+<li>mousemove - when the mouse pointer move on the element</li>
+<li>mouseover - when the mouse pointer move on the element</li>
+<li>mouseout -when the mouse pointer out from the element</li>
+<li>input -when value enter to input field</li>
+<li>change -when value change on input field</li>
+<li>blur -when the element is not focused</li>
+<li>keydown - when a key is down</li>
+<li>keyup - when a key is up</li>
+<li>keypress - when we press any key</li>
+<li>onload - when the browser has finished loading a page</li>
+</ul>
+<p>Test the above event types by replacing event type in the above snippet code.</p>
+<h3 id="getting-value-from-an-input-element">Getting value from an input element</h3>
+<p>We usually fill forms and forms accept data. Form fields are created using input HTML element. Let us build a small application which allow us to calculate body mas index of a person using two input fields, one button and one p tag.</p>
+<h3 id="input-value">input value</h3>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Document Object Model:30 Days Of JavaScript&lt;/title&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;h1&gt;Body Mass Index Calculator&lt;/h1&gt;
+
+    &lt;input type=&quot;text&quot; id=&quot;mass&quot; placeholder=&quot;Mass in Kilogram&quot; /&gt;
+    &lt;input type=&quot;text&quot; id=&quot;height&quot; placeholder=&quot;Height in meters&quot; /&gt;
+    &lt;button&gt;Calculate BMI&lt;/button&gt;
+
+    &lt;script&gt;
+      const mass = document.querySelector(&#39;#mass&#39;)
+      const height = document.querySelector(&#39;#height&#39;)
+      const button = document.querySelector(&#39;button&#39;)
+
+      let bmi
+      button.addEventListener(&#39;click&#39;, () =&gt; {
+        bmi = mass.value / height.value ** 2
+        alert(`your bmi is ${bmi.toFixed(2)}`)
+        console.log(bmi)
+      })
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h4 id="input-event-and-change">input event and change</h4>
+<p>In the above example, we managed to get input values from two input fields by clicking button. How about if we want to get value without click the button. We can use the <em>change</em> or <em>input</em> event type to get data right away from the input field when the field is on focus. Let us see how we will handle that.</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Document Object Model:30 Days Of JavaScript&lt;/title&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;h1&gt;Data Binding using input or change event&lt;/h1&gt;
+
+    &lt;input type=&quot;text&quot; placeholder=&quot;say something&quot; /&gt;
+    &lt;p&gt;&lt;/p&gt;
+
+    &lt;script&gt;
+      const input = document.querySelector(&#39;input&#39;)
+      const p = document.querySelector(&#39;p&#39;)
+
+      input.addEventListener(&#39;input&#39;, e =&gt; {
+        p.textContent = e.target.value
+      })
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h4 id="blur-event">blur event</h4>
+<p>In contrast to <em>input</em> or <em>change</em>, the <em>blur</em> event occur when the input field is not on focus.</p>
+<pre><code class="language-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+    &lt;title&gt;Document Object Model:30 Days Of JavaScript&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;h1&gt;Giving feedback using blur event&lt;/h1&gt;
+
+    &lt;input type=&quot;text&quot; id=&quot;mass&quot; placeholder=&quot;say something&quot; /&gt;
+    &lt;p&gt;&lt;/p&gt;
+
+    &lt;script&gt;
+        const input = document.querySelector(&#39;input&#39;)
+        const p = document.querySelector(&#39;p&#39;)
+
+        input.addEventListener(&#39;blur&#39;, (e) =&gt; {
+            p.textContent = &#39;Field is required&#39;
+            p.style.color = &#39;red&#39;
+
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+<h4 id="keypress-keydow-and-keyup">keypress, keydow and keyup</h4>
+<p>We can access all the key numbers of the keyboard using different event listener types. Let us use keypress and get the keyCode of each keyboard keys.</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Document Object Model:30 Days Of JavaScript&lt;/title&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;h1&gt;Key events: Press any key&lt;/h1&gt;
+
+    &lt;script&gt;
+      document.body.addEventListener(&#39;keypress&#39;, e =&gt; {
+        alert(e.keyCode)
+      })
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<hr>
+<p>🌕 You are so special, you are progressing everyday. Now, you knew how handle any kind of DOM events. . You are left with only seven days to your way to greatness. Now do some exercises for your brain and for your muscle.</p>
+<h2 id="exercises">Exercises</h2>
+<h3 id="exercise-level-1">Exercise: Level 1</h3>
+<ol>
+<li>Generating numbers and marking evens, odds and prime numbers with three different colors. See the image below.</li>
+</ol>
+<p><img src="./../images/projects/dom_min_project_number_generator_day_3.1.gif" alt="Number Generator"></p>
+<ol>
+<li>Generating the keyboard code code using even listener. The image below.</li>
+</ol>
+<p><img src="./../images/projects/dom_min_project_keycode_day_3.2.gif" alt="Keyboard key"></p>
+<p>🎉 CONGRATULATIONS ! 🎉</p>
+<p><a href="../22_Day_Manipulating_DOM_object/22_day_manipulating_DOM_object.html">&lt;&lt; Day 22</a> | <a href="../24_Day_Project_solar_system/24_day_project_solar_system.html">Day 24 &gt;&gt;</a></p>
